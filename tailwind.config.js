@@ -37,6 +37,20 @@ module.exports = {
 
         colorItems: "var(--color-items)",
       },
+      keyframes: {
+        roll: {
+          "0%, 100%": { transform: "translateX(0) rotate(0deg)" },
+          "50%": { transform: "rotate(385deg)" },
+        },
+        zoom: {
+          "0%, 100%": { transform: "scale(1) scale(1.1)" },
+          "50%": { transform: "scale(1.3)" },
+        },
+      },
+      animation: {
+        roll: "roll 1s ease-in-out",
+        zoom: "zoom 1s ease-in-out",
+      },
     },
   },
   variants: {

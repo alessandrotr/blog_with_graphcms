@@ -10,7 +10,7 @@ function Footer() {
     getCategories().then((newCategories) => setCategories(newCategories));
   }, []);
   return (
-    <div className="container mx-auto px-10">
+    <div className="container mx-auto px-4 md:px-10 mt-20 md:mt-10">
       <div className="border-t-2 w-full inline-block border-colorItems py-8 px-2">
         <div className="md:float-left block">
           <Link href="/" passHref>

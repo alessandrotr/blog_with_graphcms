@@ -12,7 +12,7 @@ function Header() {
     getCategories().then((newCategories) => setCategories(newCategories));
   }, []);
   return (
-    <div className="sticky top-0 w-full container mx-auto px-10 mb-8 z-20 bg-primaryLightOpacity dark:bg-primaryDarkOpacity">
+    <div className="sticky top-0 w-full container mx-auto px-4 md:px-10 mb-8 z-20 bg-primaryLightOpacity dark:bg-primaryDarkOpacity">
       <div className="w-full flex align-center items-center justify-between py-4 px-2">
         <div className="md:float-left block">
           <Link href="/" passHref>

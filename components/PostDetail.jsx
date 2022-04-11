@@ -58,10 +58,25 @@ const PostDetail = ({ post }) => {
         return modifiedText;
     }
   };
-
   return (
-    <div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
+    <div className="lg:p-8 lg:pt-0 pb-12 mb-8 rounded-lg">
       <div className="relative overflow-hidden shadow-md mb-6">
+        <div className="absolute right-0 pt-3">
+          {post.categories.map((pc) => {
+            return (
+              <span
+                key={pc.name}
+                // style={{
+                //   borderTopRightRadius: "0.6rem",
+                //   borderBottomLeftRadius: "0.5rem",
+                // }}
+                className="bg-colorItems text-white p-4 right-0 font-semibold shadow-lg mr-4"
+              >
+                {pc.name}
+              </span>
+            );
+          })}
+        </div>
         <img
           src={post.featuredImage.url}
           alt={post.title}
@@ -78,14 +93,14 @@ const PostDetail = ({ post }) => {
               width="30px"
               className="align-middle rounded-full"
             />
-            <p className="inline align-middle text-gray-700 ml-2 text-lg">
+            <p className="inline align-middle text-secondaryDark dark:text-secondaryLight ml-2 text-lg">
               {post.author.name}
             </p>
           </div>
-          <div className="font-medium text-gray-700">
+          <div className="font-medium text-secondaryDark dark:text-secondaryLight">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 inline mr-2 text-pink-500"
+              className="h-6 w-6 inline mr-2 text-colorItems"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

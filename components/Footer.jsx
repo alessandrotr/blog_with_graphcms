@@ -3,20 +3,18 @@ import Link from "next/link";
 
 import { getCategories } from "../services";
 
-import ThemeToggle from "./ThemeToggle/ThemeToggle";
-
-function Header() {
+function Footer() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getCategories().then((newCategories) => setCategories(newCategories));
   }, []);
   return (
-    <div className="sticky top-0 w-full container mx-auto px-10 mb-8 z-20 bg-primaryLightOpacity dark:bg-primaryDarkOpacity">
-      <div className="w-full inline-block py-4 px-2">
+    <div className="container mx-auto px-10">
+      <div className="border-t-2 w-full inline-block border-colorItems py-8 px-2">
         <div className="md:float-left block">
           <Link href="/" passHref>
-            <span className="cursor-pointer font-bold text-4xl text-primaryDark dark:text-primaryLight">
+            <span className="cursor-pointer font-bold text-4xl text-black dark:text-white">
               Blog
             </span>
           </Link>
@@ -33,11 +31,10 @@ function Header() {
               </span>
             </Link>
           ))}
-          <ThemeToggle />
         </div>
       </div>
     </div>
   );
 }
 
-export default Header;
+export default Footer;

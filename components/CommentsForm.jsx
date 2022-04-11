@@ -54,14 +54,14 @@ const CommentsForm = ({ slug }) => {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8">
-      <h3 className="text-xl mb-8 font-semibold border-b pb-4">
+    <div className="bg-secondaryLight dark:bg-secondaryDark rounded-lg p-8 pb-12 mb-8">
+      <h3 className="text-xl mb-8 font-semibold border-b-2 border-colorItems pb-4">
         Leave a reply
       </h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <textarea
           ref={commentEl}
-          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700"
+          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-primaryLight dark:bg-primaryDark text-gray-700 dark:text-gray-300"
           placeholder="Comment"
           name="comment"
         />
@@ -70,14 +70,14 @@ const CommentsForm = ({ slug }) => {
         <input
           type="text"
           ref={nameEl}
-          className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700"
+          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-primaryLight dark:bg-primaryDark text-gray-700 dark:text-gray-300"
           placeholder="Name"
           name="name"
         />
         <input
           type="text"
           ref={emailEl}
-          className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700"
+          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-primaryLight dark:bg-primaryDark text-gray-700 dark:text-gray-300"
           placeholder="Email"
           name="email"
         />
@@ -92,7 +92,7 @@ const CommentsForm = ({ slug }) => {
             value={true}
           />
           <label
-            className="text-gray-500 cursor-pointer ml-2"
+            className="text-secondaryDark dark:text-secondaryLight cursor-pointer ml-2"
             htmlFor="storeData"
           >
             Save my e-mail and name for the next time I comment.
@@ -100,18 +100,18 @@ const CommentsForm = ({ slug }) => {
         </div>
       </div>
       {error && (
-        <p className="text-xs text-red-500">All fields are required.</p>
+        <p className="text-xs text-red-600">All fields are required.</p>
       )}
       <div className="mt-8">
         <button
           type="button"
           onClick={handleCommentSubmission}
-          className="transition duration-500 ease hover:bg-indigo-900 inline-block bg-pink-600 text-lg text-white rounded-full px-8 py-3 cursor-pointer"
+          className="transition duration-600 ease hover:bg-colorItems inline-block bg-colorItems text-lg text-white rounded-full px-8 py-3 cursor-pointer"
         >
           Post Comment
         </button>
         {showSuccessMessage && (
-          <span className="text-xl float-right font-semibold mt-3 text-green-500">
+          <span className="text-xl float-right font-semibold mt-3 text-green-600">
             Comment submitted for review
           </span>
         )}

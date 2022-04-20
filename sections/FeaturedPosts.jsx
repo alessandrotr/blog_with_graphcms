@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import { FeaturedPostCard } from "../components";
-import { getFeaturedPosts } from "../services";
+import { FeaturedPostCard, PrincipalPostCard } from "../components";
+import { getFeaturedPosts, getPrincipalPost } from "../services";
 
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 1024 },
-    items: 5,
+    items: 4,
   },
   desktop: {
     breakpoint: { max: 1024, min: 768 },
@@ -26,11 +26,19 @@ const responsive = {
 
 const FeaturedPosts = () => {
   const [featuredPosts, setFeaturedPosts] = useState([]);
+  const [principalPost, setPrincipalPost] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     getFeaturedPosts().then((result) => {
       setFeaturedPosts(result);
+      setDataLoaded(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    getPrincipalPost().then((result) => {
+      setPrincipalPost(result);
       setDataLoaded(true);
     });
   }, []);
@@ -72,21 +80,31 @@ const FeaturedPosts = () => {
       </svg>
     </div>
   );
-
   return (
     <div className="mb-8">
-      <Carousel
-        infinite
-        customLeftArrow={customLeftArrow}
-        customRightArrow={customRightArrow}
-        responsive={responsive}
-        itemClass="px-4"
-      >
-        {dataLoaded &&
-          featuredPosts.map((post, index) => (
-            <FeaturedPostCard key={index} post={post} />
-          ))}
-      </Carousel>
+      <h3 className="text-xl mb-4 font-semibold border-b-2 border-colorItems pb-4">
+        We want you to see
+      </h3>
+      <div className="bg-secondaryLight dark:bg-secondaryDark p-8 rounded-lg">
+        <div className="mb-6">
+          {dataLoaded &&
+            principalPost.map((post, index) => (
+              <PrincipalPostCard key={index} post={post} />
+            ))}
+        </div>
+        <Carousel
+          infinite
+          customLeftArrow={customLeftArrow}
+          customRightArrow={customRightArrow}
+          responsive={responsive}
+          itemClass="px-4"
+        >
+          {dataLoaded &&
+            featuredPosts.map((post, index) => (
+              <FeaturedPostCard key={index} post={post} />
+            ))}
+        </Carousel>
+      </div>
     </div>
   );
 };

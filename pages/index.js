@@ -20,8 +20,11 @@ export default function Home({ posts }) {
       <FeaturedPosts />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
+          <h3 className="text-xl mb-8 font-semibold border-b-2 border-colorItems pb-4">
+            All Posts
+          </h3>
           {posts.map((post, index) => (
-            <PostCard key={post.title} post={post.node} />
+            <PostCard key={post.title} post={post.node} showExcerpt />
           ))}
         </div>
 

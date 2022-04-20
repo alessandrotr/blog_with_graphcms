@@ -200,6 +200,37 @@ export const getFeaturedPosts = async () => {
         title
         slug
         createdAt
+        categories {
+          name
+        }
+      }
+    }   
+  `;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.posts;
+};
+
+export const getPrincipalPost = async () => {
+  const query = gql`
+    query GetPrincipalPost() {
+      posts(where: {principalPost: true}) {
+        author {
+          name
+          photo {
+            url
+          }
+        }
+        featuredImage {
+          url
+        }
+        title
+        slug
+        createdAt
+        categories {
+          name
+        }
       }
     }   
   `;

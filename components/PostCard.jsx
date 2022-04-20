@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import Link from "next/link";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, showExcerpt }) => {
   return (
     <div className="bg-secondaryLight dark:bg-secondaryDark p-0 lg:p-8 pb-12 mb-8 rounded-lg">
       <div className="relative overflow-hidden shadow-inner pb-80 mb-6">
@@ -46,9 +46,11 @@ const PostCard = ({ post }) => {
           <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
         </div>
       </div>
-      <p className="text-center text-lg text-secondaryDark dark:text-secondaryLight font-normal px-4 lg:px-20 mb-8">
-        {post.excerpt}
-      </p>
+      {showExcerpt && (
+        <p className="text-center text-lg text-secondaryDark dark:text-secondaryLight font-normal px-4 lg:px-20 mb-8">
+          {post.excerpt}
+        </p>
+      )}
       <div className="text-center">
         <Link href={`/post/${post.slug}`}>
           <span className="transition duration-500 transform hover:-translate-y-1 inline-block bg-colorItems text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">

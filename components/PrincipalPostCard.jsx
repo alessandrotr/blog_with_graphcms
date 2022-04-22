@@ -2,46 +2,49 @@ import React from "react";
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
+import CategoryBadge from "./ui/CategoryBadge";
+import ExcerptWithOverflow from "./ui/ExcerptWithOverflow";
+import CreatedAtBadge from "./ui/CreatedAtBadge";
 
-const PrincipalPostCard = ({ post }) => (
-  <div className="relative h-96">
-    <div
-      className="absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-96"
-      style={{ backgroundImage: `url('${post.featuredImage.url}')` }}
-    />
-    <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-full h-96" />
-    <div className="flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full">
-      <p className="text-white mb-4 text-shadow font-semibold text-xs">
-        {moment(post.createdAt).format("MMM DD, YYYY")}
-      </p>
-      <p className="text-white mb-4 text-shadow font-semibold text-6xl text-center">
-        {post.title}
-      </p>
-      <div className="flex items-center absolute bottom-5 w-full justify-center">
-        <Image
-          unoptimized
-          alt={post.author.name}
-          height="30px"
-          width="30px"
-          className="align-middle drop-shadow-lg rounded-full"
-          src={post.author.photo.url}
-        />
-        <p className="inline align-middle text-white text-shadow ml-2 font-medium">
-          {post.author.name}
-        </p>
+import { GiRead } from "react-icons/gi";
+
+const PrincipalPostCard = ({ post }) => {
+  console.log(post);
+  return (
+    <div className="relative h-96 flex items-center">
+      <div
+        className=" rounded-lg bg-center bg-no-repeat shadow-md inline-block w-2/4 h-96 bg-cover"
+        style={{ backgroundImage: `url('${post.featuredImage.url}')` }}
+      />
+      <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-2/4 h-96 top-0" />
+      <div className="flex flex-col p-8 justify-center w-2/4 h-full bg-secondaryLight dark:bg-secondaryDark h-3/4 -ml-8 z-10 shadow-lg">
+        <CreatedAtBadge postCreatedAt={post.createdAt} />
+
+        <Link href={`/post/${post.slug}`}>
+          <p className="text-secondaryDark dark:text-secondaryLight cursor-pointer mb-4 font-semibold text-2xl lg:text-3xl underline decoration-transparent hover:decoration-[#5865f2]">
+            {post.title}
+          </p>
+        </Link>
+        <ExcerptWithOverflow>{post.excerpt}</ExcerptWithOverflow>
+
+        <div className="flex justify-between items-center mt-8">
+          <Link href={`/post/${post.slug}`}>
+            <span className="cursor-pointer flex items-center max-w-max">
+              <GiRead className="text-colorItems mr-3 text-3xl" />
+              <span className="text-primaryDark dark:text-primaryLight border-b border-transparent hover:border-colorItems">
+                Read more...
+              </span>
+            </span>
+          </Link>
+          <p className="text-secondaryDark font-medium">
+            {post.categories.map((category) => (
+              <CategoryBadge key={category.name} category={category} />
+            ))}
+          </p>
+        </div>
       </div>
-      <p className="text-white text-shadow ml-2 font-medium absolute top-0 right-0">
-        {post.categories.map((category) => (
-          <span key={category.name} className="mx-2 bg-colorItems px-2 text-xs">
-            {category.name}
-          </span>
-        ))}
-      </p>
     </div>
-    <Link href={`/post/${post.slug}`}>
-      <span className="cursor-pointer absolute w-full h-full" />
-    </Link>
-  </div>
-);
+  );
+};
 
 export default PrincipalPostCard;

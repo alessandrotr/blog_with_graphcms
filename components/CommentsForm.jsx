@@ -54,14 +54,12 @@ const CommentsForm = ({ slug }) => {
   };
 
   return (
-    <div className="bg-secondaryLight dark:bg-secondaryDark rounded-lg p-8 pb-12 mb-8">
-      <h3 className="text-xl mb-8 font-semibold border-b-2 border-colorItems pb-4">
-        Leave a reply
-      </h3>
+    <div className="my-20">
+      <h3 className="text-xl mb-8 font-semibold">Leave a reply</h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <textarea
           ref={commentEl}
-          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-primaryLight dark:bg-primaryDark text-gray-700 dark:text-gray-300"
+          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-secondaryLight dark:bg-secondaryDark text-gray-700 dark:text-gray-300"
           placeholder="Comment"
           name="comment"
         />
@@ -70,14 +68,14 @@ const CommentsForm = ({ slug }) => {
         <input
           type="text"
           ref={nameEl}
-          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-primaryLight dark:bg-primaryDark text-gray-700 dark:text-gray-300"
+          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-secondaryLight dark:bg-secondaryDark text-gray-700 dark:text-gray-300"
           placeholder="Name"
           name="name"
         />
         <input
           type="text"
           ref={emailEl}
-          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-primaryLight dark:bg-primaryDark text-gray-700 dark:text-gray-300"
+          className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 focus:dark:ring-gray-700 bg-secondaryLight dark:bg-secondaryDark text-gray-700 dark:text-gray-300"
           placeholder="Email"
           name="email"
         />
@@ -106,7 +104,7 @@ const CommentsForm = ({ slug }) => {
         <button
           type="button"
           onClick={handleCommentSubmission}
-          className="transition duration-600 ease hover:bg-colorItems inline-block bg-colorItems text-lg text-white rounded-full px-8 py-3 cursor-pointer"
+          className="transition duration-600 ease hover:bg-colorItems inline-block bg-colorItems text-sm text-white px-6 py-2 cursor-pointer"
         >
           Post Comment
         </button>

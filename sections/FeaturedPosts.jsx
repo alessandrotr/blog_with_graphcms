@@ -8,11 +8,11 @@ import { getFeaturedPosts, getPrincipalPost } from "../services";
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 1024 },
-    items: 4,
+    items: 2,
   },
   desktop: {
     breakpoint: { max: 1024, min: 768 },
-    items: 3,
+    items: 2,
   },
   tablet: {
     breakpoint: { max: 768, min: 640 },
@@ -42,12 +42,12 @@ const FeaturedPosts = () => {
       setDataLoaded(true);
     });
   }, []);
-
+  console.log(principalPost);
   const customLeftArrow = (
-    <div className="absolute arrow-btn left-0 text-center py-3 cursor-pointer bg-colorItems rounded-full">
+    <div className="absolute rounded-full arrow-btn left-0 bottom-0 text-center py-3 cursor-pointer bg-colorItems flex justify-center hover:justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-white w-full"
+        className="h-6 w-6 text-secondaryLight w-full"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -63,10 +63,10 @@ const FeaturedPosts = () => {
   );
 
   const customRightArrow = (
-    <div className="absolute arrow-btn right-0 text-center py-3 cursor-pointer bg-colorItems rounded-full">
+    <div className="absolute rounded-full arrow-btn right-0 top-0 text-center py-3 cursor-pointer bg-colorItems flex justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-white w-full"
+        className="h-6 w-6 text-secondaryLight w-full"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -82,10 +82,7 @@ const FeaturedPosts = () => {
   );
   return (
     <div className="mb-8">
-      <h3 className="text-xl mb-4 font-semibold border-b-2 border-colorItems pb-4">
-        We want you to see
-      </h3>
-      <div className="bg-secondaryLight dark:bg-secondaryDark p-8 rounded-lg">
+      <div className="">
         <div className="mb-6">
           {dataLoaded &&
             principalPost.map((post, index) => (
@@ -97,7 +94,7 @@ const FeaturedPosts = () => {
           customLeftArrow={customLeftArrow}
           customRightArrow={customRightArrow}
           responsive={responsive}
-          itemClass="px-4"
+          itemClass="px-2"
         >
           {dataLoaded &&
             featuredPosts.map((post, index) => (

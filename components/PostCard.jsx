@@ -1,62 +1,43 @@
 import React from "react";
 import moment from "moment";
 import Link from "next/link";
+import ExcerptWithOverflow from "./ui/ExcerptWithOverflow";
+import CategoryBadge from "./ui/CategoryBadge";
+import { GiRead } from "react-icons/gi";
+import CreatedAtBadge from "./ui/CreatedAtBadge";
 
 const PostCard = ({ post, showExcerpt }) => {
   return (
-    <div className="bg-secondaryLight dark:bg-secondaryDark p-0 lg:p-8 pb-12 mb-8 rounded-lg">
-      <div className="relative overflow-hidden shadow-inner pb-80 mb-6">
-        <img
-          src={post.featuredImage.url}
-          alt={post.title}
-          className="object-top absolute h-80 w-full object-cover  shadow-inner rounded-t-lg lg:rounded-lg"
-        />
-      </div>
-      <h1 className="transition duration-700 text-center mb-8 cursor-pointer text-3xl font-semibold text-primaryDark dark:text-primaryLight">
-        <Link href={`/post/${post.slug}`}>{post.title}</Link>
-      </h1>
-      <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
-        <div className="flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
-          <img
-            src={post.author.photo.url}
-            alt={post.author.name}
-            height="30px"
-            width="30px"
-            className="align-middle rounded-full"
-          />
-          <p className="inline align-middle text-secondaryDark dark:text-secondaryLight ml-2 text-lg">
-            {post.author.name}
-          </p>
-        </div>
-        <div className="font-medium text-secondaryDark dark:text-secondaryLight">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 inline mr-2 text-colorItems"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
-          <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
-        </div>
-      </div>
-      {showExcerpt && (
-        <p className="text-center text-lg text-secondaryDark dark:text-secondaryLight font-normal px-4 lg:px-20 mb-8">
-          {post.excerpt}
-        </p>
-      )}
-      <div className="text-center">
+    <div className="relative h-72 flex mb-12 items-center">
+      <div
+        className=" rounded-lg bg-center bg-no-repeat shadow-md inline-block w-2/4 h-72 bg-cover"
+        style={{ backgroundImage: `url('${post.featuredImage.url}')` }}
+      />
+      <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-2/4 h-72 top-0" />
+      <div className="flex flex-col p-6 justify-center w-2/4 h-8/12 bg-secondaryLight dark:bg-secondaryDark -ml-8 z-10 shadow-lg">
+        <CreatedAtBadge postCreatedAt={post.createdAt} />
+
         <Link href={`/post/${post.slug}`}>
-          <span className="transition duration-500 transform hover:-translate-y-1 inline-block bg-colorItems text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">
-            Continue reading
+          <p className="text-secondaryDark dark:text-secondaryLight cursor-pointer mb-4 font-semibold lg:text-xl underline decoration-transparent hover:decoration-[#5865f2]">
+            {post.title}
+          </p>
+        </Link>
+        <ExcerptWithOverflow>{post.excerpt}</ExcerptWithOverflow>
+
+        <Link href={`/post/${post.slug}`}>
+          <span className="cursor-pointer flex items-center max-w-max mt-6">
+            <GiRead className="text-colorItems mr-3 text-3xl" />
+            <span className="text-primaryDark dark:text-primaryLight border-b border-transparent hover:border-colorItems text-xs">
+              Read more...
+            </span>
           </span>
         </Link>
+
+        <p className="font-medium mt-6 absolute bottom-0 left-0">
+          {post.categories.map((category) => (
+            <CategoryBadge key={category.name} category={category} />
+          ))}
+        </p>
       </div>
     </div>
   );

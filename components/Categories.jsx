@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getCategories } from "../services";
 
+import CategoryBadge from "./ui/CategoryBadge";
+
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const router = useRouter();
@@ -13,21 +15,11 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="bg-secondaryLight dark:bg-secondaryDark rounded-lg p-8 mb-8 pb-12">
-      <h3 className="text-xl mb-8 font-semibold border-b-2 border-colorItems pb-4">
-        Categories
-      </h3>
+    <div className="mb-8 pb-12">
+      <h3 className="text-xl mb-6 font-semibold">Categories</h3>
 
       {categories.map((category) => (
-        <Link key={category.slug} href={`/category/${category.slug}`}>
-          <span
-            className={`cursor-pointer block pb-3 mb-3 ${
-              category.slug === router.query.slug ? "text-colorItems" : ""
-            } `}
-          >
-            {category.name}
-          </span>
-        </Link>
+        <CategoryBadge key={category.name} category={category} />
       ))}
     </div>
   );

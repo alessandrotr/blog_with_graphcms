@@ -27,6 +27,9 @@ export const getPosts = async () => {
             categories {
               name
               slug
+              color {
+                hex
+              }
             }
           }
         }
@@ -45,6 +48,9 @@ export const getCategories = async () => {
       categories {
         name
         slug
+        color {
+          hex
+        }
       }
     }
   `;
@@ -78,6 +84,9 @@ export const getPostDetails = async (slug) => {
         categories {
           name
           slug
+          color {
+            hex
+          }
         }
       }
     }
@@ -126,6 +135,7 @@ export const getAdjacentPosts = async (createdAt, slug) => {
         }
         createdAt
         slug
+        excerpt
       }
       previous: posts(
         first: 1
@@ -138,6 +148,7 @@ export const getAdjacentPosts = async (createdAt, slug) => {
         }
         createdAt
         slug
+        excerpt
       }
     }
   `;
@@ -172,6 +183,9 @@ export const getCategoryPost = async (slug) => {
             categories {
               name
               slug
+              color {
+                hex
+              }
             }
           }
         }
@@ -198,10 +212,15 @@ export const getFeaturedPosts = async () => {
           url
         }
         title
+        excerpt
         slug
         createdAt
         categories {
           name
+          slug
+          color {
+            hex
+          }
         }
       }
     }   
@@ -226,10 +245,15 @@ export const getPrincipalPost = async () => {
           url
         }
         title
+        excerpt
         slug
         createdAt
         categories {
           name
+          slug
+          color {
+            hex
+          }
         }
       }
     }   

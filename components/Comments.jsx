@@ -15,8 +15,8 @@ const Comments = ({ slug }) => {
   return (
     <>
       {comment.length > 0 && (
-        <div className="bg-secondaryLight dark:bg-secondaryDark p-8 p-12 mb-8 rounded-lg">
-          <h3 className="text-xl mb-8 font-semibold border-b-2 border-colorItems pb-4">
+        <div className="my-8 ">
+          <h3 className="text-xl mb-8 font-semibold">
             {comments.length}
             {"\u00A0"}
             Comments
@@ -24,7 +24,7 @@ const Comments = ({ slug }) => {
           {comments.map((comment) => (
             <div
               key={comment.createdAt}
-              className="border-b border-primaryLight dark:border-primaryDark mb-4 pb-4"
+              className="mb-4 pb-4 bg-secondaryLight dark:bg-secondaryDark p-4"
             >
               <p className="mb-4">
                 <span className="font-semibold">{comment.name}</span>

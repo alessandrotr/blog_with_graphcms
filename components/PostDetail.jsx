@@ -1,7 +1,9 @@
 import React from "react";
-import moment from "moment";
+import CategoryBadge from "./ui/CategoryBadge";
+import CreatedAtBadge from "./ui/CreatedAtBadge";
 
 const PostDetail = ({ post }) => {
+  console.log(post);
   const getContentFragment = (index, text, obj, type) => {
     let modifiedText = text;
 
@@ -60,62 +62,27 @@ const PostDetail = ({ post }) => {
   };
   return (
     <div className="lg:p-8 lg:pt-0 pb-12 mb-8 rounded-lg">
-      <div className="relative overflow-hidden shadow-md mb-6">
-        <div className="absolute right-0 pt-3">
-          {post.categories.map((pc) => {
-            return (
-              <span
-                key={pc.name}
-                // style={{
-                //   borderTopRightRadius: "0.6rem",
-                //   borderBottomLeftRadius: "0.5rem",
-                // }}
-                className="bg-colorItems text-white p-4 right-0 font-semibold shadow-lg mr-4"
-              >
-                {pc.name}
-              </span>
-            );
+      <div className="flex justify-between items-end mb-6">
+        <CreatedAtBadge postCreatedAt={post.createdAt} customPosition />
+        <div>
+          {post.categories.map((category) => {
+            return <CategoryBadge key={category.name} category={category} />;
           })}
         </div>
+      </div>
+      <h1 className="mb-8 text-4xl font-semibold leading-normal">
+        {post.title}
+      </h1>
+      <p className="mb-8 text-lg font-normal leading-normal">{post.excerpt}</p>
+      <div className="relative overflow-hidden shadow-md mb-6">
         <img
           src={post.featuredImage.url}
           alt={post.title}
-          className="object-top h-full w-full rounded-t-lg"
+          className="object-top h-full w-full"
         />
       </div>
       <div className="px-4 lg:px-0">
-        <div className="flex items-center mb-8 w-full">
-          <div className="flex items-center mb-4 lg:mb-0 w-full lg:w-auto mr-8">
-            <img
-              src={post.author.photo.url}
-              alt={post.author.name}
-              height="30px"
-              width="30px"
-              className="align-middle rounded-full"
-            />
-            <p className="inline align-middle text-secondaryDark dark:text-secondaryLight ml-2 text-lg">
-              {post.author.name}
-            </p>
-          </div>
-          <div className="font-medium text-secondaryDark dark:text-secondaryLight">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 inline mr-2 text-colorItems"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
-          </div>
-        </div>
-        <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
+        <div className="flex items-center mb-8 w-full"></div>
         {post.content.raw.children.map((typeObj, index) => {
           const children = typeObj.children.map((item, itemIndex) =>
             getContentFragment(itemIndex, item.text, item)

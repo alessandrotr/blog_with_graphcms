@@ -5,7 +5,7 @@ import Link from "next/link";
 import CategoryBadge from "./ui/CategoryBadge";
 import ExcerptWithOverflow from "./ui/ExcerptWithOverflow";
 import CreatedAtBadge from "./ui/CreatedAtBadge";
-
+import { FaRegComments } from "react-icons/fa";
 import { GiRead } from "react-icons/gi";
 
 const PrincipalPostCard = ({ post }) => {
@@ -25,6 +25,10 @@ const PrincipalPostCard = ({ post }) => {
             {post.title}
           </p>
         </Link>
+        <p className="flex mb-2">
+          <FaRegComments className="text-xl mr-2" />
+          {post.comments.length}
+        </p>
         <ExcerptWithOverflow>{post.excerpt}</ExcerptWithOverflow>
 
         <div className="flex justify-between items-center mt-8">

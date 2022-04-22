@@ -25,7 +25,7 @@ function Header() {
           </Link>
         </div>
         <div className="flex align-center items-center">
-          <div className="hidden md:contents md:mr-4">
+          <div className="hidden md:contents">
             {categories.map((category) => (
               <Link
                 key={category.slug}

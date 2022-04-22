@@ -21,6 +21,9 @@ export const getPosts = async () => {
             slug
             title
             excerpt
+            comments {
+              id
+            }
             featuredImage {
               url
             }
@@ -173,6 +176,9 @@ export const getCategoryPost = async (slug) => {
                 url
               }
             }
+            comments {
+              id
+            }
             createdAt
             slug
             title
@@ -202,6 +208,9 @@ export const getFeaturedPosts = async () => {
   const query = gql`
     query GetCategoryPost() {
       posts(where: {featuredPost: true}) {
+        comments {
+          id
+        }
         author {
           name
           photo {
@@ -235,6 +244,9 @@ export const getPrincipalPost = async () => {
   const query = gql`
     query GetPrincipalPost() {
       posts(where: {principalPost: true}) {
+        comments {
+          id
+        }
         author {
           name
           photo {

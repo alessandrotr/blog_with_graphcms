@@ -1,10 +1,9 @@
 import React from "react";
-import moment from "moment";
-import Image from "next/image";
 import Link from "next/link";
 import CategoryBadge from "./ui/CategoryBadge";
 import ExcerptWithOverflow from "./ui/ExcerptWithOverflow";
 import CreatedAtBadge from "./ui/CreatedAtBadge";
+import { FaRegComments } from "react-icons/fa";
 
 const FeaturedPostCard = ({ post }) => (
   <div className="relative h-72">
@@ -15,8 +14,12 @@ const FeaturedPostCard = ({ post }) => (
     <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-70 from-gray-400 via-gray-700 to-black w-full h-72" />
     <div className="flex flex-col rounded-lg p-4 justify-center absolute w-full h-full px-6">
       <CreatedAtBadge postCreatedAt={post.createdAt} />
-      <p className="text-secondaryLight mb-4 text-shadow font-semibold text-2xl">
+      <p className="text-secondaryLight mb-2 text-shadow font-semibold text-2xl">
         {post.title}
+      </p>
+      <p className="flex mb-2">
+        <FaRegComments className="text-xl mr-2" />
+        {post.comments.length}
       </p>
       <ExcerptWithOverflow featuredPostCard={true}>
         {post.excerpt}

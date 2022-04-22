@@ -4,9 +4,11 @@ import Link from "next/link";
 import ExcerptWithOverflow from "./ui/ExcerptWithOverflow";
 import CategoryBadge from "./ui/CategoryBadge";
 import { GiRead } from "react-icons/gi";
+import { FaRegComments } from "react-icons/fa";
 import CreatedAtBadge from "./ui/CreatedAtBadge";
 
 const PostCard = ({ post, showExcerpt }) => {
+  console.log(post);
   return (
     <div className="relative h-72 flex mb-12 items-center">
       <div
@@ -22,6 +24,10 @@ const PostCard = ({ post, showExcerpt }) => {
             {post.title}
           </p>
         </Link>
+        <p className="flex mb-2">
+          <FaRegComments className="text-xl mr-2" />
+          {post.comments.length}
+        </p>
         <ExcerptWithOverflow>{post.excerpt}</ExcerptWithOverflow>
 
         <Link href={`/post/${post.slug}`}>

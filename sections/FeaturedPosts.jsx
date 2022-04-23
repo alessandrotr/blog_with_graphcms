@@ -43,7 +43,7 @@ const FeaturedPosts = () => {
     });
   }, []);
   const customLeftArrow = (
-    <div className="absolute arrow-btn left-0 bottom-0 text-center py-3 cursor-pointer bg-colorItems flex justify-center hover:justify-center">
+    <div className="absolute arrow-btn left-0 text-center py-3 cursor-pointer bg-colorItems flex justify-center hover:justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6 text-secondaryLight w-full"
@@ -62,7 +62,7 @@ const FeaturedPosts = () => {
   );
 
   const customRightArrow = (
-    <div className="absolute arrow-btn right-0 bottom-0 text-center py-3 cursor-pointer bg-colorItems flex justify-center">
+    <div className="absolute arrow-btn right-0 text-center py-3 cursor-pointer bg-colorItems flex justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6 text-secondaryLight w-full"
@@ -93,7 +93,7 @@ const FeaturedPosts = () => {
           customLeftArrow={customLeftArrow}
           customRightArrow={customRightArrow}
           responsive={responsive}
-          itemClass="px-2"
+          itemClass="p-2"
         >
           {dataLoaded &&
             featuredPosts.map((post, index) => (

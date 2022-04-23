@@ -22,7 +22,7 @@ const RecentOrRelatedPost = ({ post }) => {
             backgroundImage: `url('${post.featuredImage.url}')`,
           }}
         />
-        <div className="inline align-middle font-medium titleRelatedPostOverflow w-8/12 px-4 text-sm">
+        <div className="inline align-middle font-medium titleRelatedPostOverflow w-8/12 px-4 text-sm leading-normal">
           {post.title}
         </div>
         <CommentsCount

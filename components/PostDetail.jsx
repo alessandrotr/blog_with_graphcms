@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import CategoryBadge from "./ui/CategoryBadge";
 import CreatedAtBadge from "./ui/CreatedAtBadge";
+import CommentsCount from "./ui/CommentsCount";
+import ReadingBar from "./ui/ReadingBar";
 
 const PostDetail = ({ post }) => {
-  console.log(post);
+  const ref = useRef();
   const getContentFragment = (index, text, obj, type) => {
     let modifiedText = text;
 
@@ -60,10 +62,19 @@ const PostDetail = ({ post }) => {
         return modifiedText;
     }
   };
+
   return (
-    <div className="lg:p-8 lg:pt-0 pb-12 mb-8 rounded-lg">
+    <div ref={ref} className="lg:p-8 lg:pt-0 pb-12 mb-8 rounded-lg ">
+      <ReadingBar ref={ref.current} />
       <div className="flex justify-between items-end mb-6">
-        <CreatedAtBadge postCreatedAt={post.createdAt} customPosition />
+        <div className="flex w-6/12">
+          <CreatedAtBadge
+            postCreatedAt={post.createdAt}
+            showIcon
+            className=""
+          />
+          <CommentsCount post={post} customClass="" iconClass="text-sm" />
+        </div>
         <div>
           {post.categories.map((category) => {
             return <CategoryBadge key={category.name} category={category} />;

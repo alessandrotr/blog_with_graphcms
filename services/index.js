@@ -69,6 +69,9 @@ export const getPostDetails = async (slug) => {
       post(where: { slug: $slug }) {
         title
         excerpt
+        comments {
+          id
+        }
         featuredImage {
           url
         }
@@ -116,6 +119,9 @@ export const getSimilarPosts = async (categories, slug) => {
         }
         createdAt
         slug
+        comments {
+          id
+        }
       }
     }
   `;
@@ -139,6 +145,9 @@ export const getAdjacentPosts = async (createdAt, slug) => {
         createdAt
         slug
         excerpt
+        comments {
+          id
+        }
       }
       previous: posts(
         first: 1
@@ -152,6 +161,9 @@ export const getAdjacentPosts = async (createdAt, slug) => {
         createdAt
         slug
         excerpt
+        comments {
+          id
+        }
       }
     }
   `;
@@ -317,6 +329,9 @@ export const getRecentPosts = async () => {
         }
         createdAt
         slug
+        comments {
+          id
+        }
       }
     }
   `;

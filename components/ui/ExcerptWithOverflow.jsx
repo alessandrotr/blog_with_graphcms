@@ -1,7 +1,6 @@
 import React from "react";
 
 const ExcerptWithOverflow = (props, { children }) => {
-  console.log(props);
   return (
     <p
       className={`inline align-middle font-medium excerptOverflow mr-8 ${

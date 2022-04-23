@@ -16,7 +16,7 @@ function Header() {
       style={{ maxWidth: "1100px" }}
       className="sticky top-0 w-full container mx-auto px-4 md:px-0 mb-8 z-20 bg-primaryLightOpacity dark:bg-primaryDarkOpacity"
     >
-      <div className="w-full flex align-center items-center justify-between py-4 px-2">
+      <div className="w-full flex align-center items-center justify-between py-4 px-6">
         <div className="md:float-left block">
           <Link href="/" passHref>
             <span className="cursor-pointer font-bold text-2xl text-primaryDark dark:text-primaryLight">

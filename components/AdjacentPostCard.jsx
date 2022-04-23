@@ -1,11 +1,10 @@
 import React from "react";
-import moment from "moment";
 import Link from "next/link";
 import CreatedAtBadge from "./ui/CreatedAtBadge";
 import ExcerptWithOverflow from "./ui/ExcerptWithOverflow";
+import CommentsCount from "./ui/CommentsCount";
 
 const AdjacentPostCard = ({ post, position }) => {
-  console.log(post);
   return (
     <>
       <div
@@ -14,10 +13,16 @@ const AdjacentPostCard = ({ post, position }) => {
       />
       <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-full h-72" />
       <div className="flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full px-20">
-        <CreatedAtBadge postCreatedAt={post.createdAt} />
+        <CreatedAtBadge
+          postCreatedAt={post.createdAt}
+          customClass="absolute left-2 top-2"
+          showIcon
+        />
         <p className="text-secondaryLight mb-4 text-shadow font-semibold text-2xl">
           {post.title}
         </p>
+        <CommentsCount post={post} customClass="absolute right-2 top-2" />
+
         <ExcerptWithOverflow featuredPostCard={true}>
           {post.excerpt}
         </ExcerptWithOverflow>

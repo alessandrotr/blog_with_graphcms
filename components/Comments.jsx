@@ -15,7 +15,7 @@ const Comments = ({ slug }) => {
   return (
     <>
       {comment.length > 0 && (
-        <div className="my-8 ">
+        <div className="mt-8 mb-20">
           <h3 className="text-xl mb-8 font-semibold">
             {comments.length}
             {"\u00A0"}

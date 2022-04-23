@@ -54,7 +54,7 @@ const CommentsForm = ({ slug }) => {
   };
 
   return (
-    <div className="my-20">
+    <div className="mt-10 mb-20">
       <h3 className="text-xl mb-8 font-semibold">Leave a reply</h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <textarea

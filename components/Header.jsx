@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import CategoryMenu from "./ui/CategoryMenu";
 
 import { getCategories } from "../services";
 
@@ -16,7 +17,7 @@ function Header() {
       style={{ maxWidth: "1100px" }}
       className="sticky top-0 w-full container mx-auto px-4 md:px-0 mb-8 z-20 bg-primaryLightOpacity dark:bg-primaryDarkOpacity"
     >
-      <div className="w-full flex align-center items-center justify-between py-4 px-6">
+      <div className="w-full flex align-center items-center justify-between py-4 px-2">
         <div className="md:float-left block">
           <Link href="/" passHref>
             <span className="cursor-pointer font-bold text-2xl text-primaryDark dark:text-primaryLight">
@@ -25,19 +26,7 @@ function Header() {
           </Link>
         </div>
         <div className="flex align-center items-center">
-          <div className="hidden md:contents">
-            {categories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/category/${category.slug}`}
-                passHref
-              >
-                <span className="text-primaryDark dark:text-primaryLight ml-4 font-semibold cursor-pointer">
-                  {category.name}
-                </span>
-              </Link>
-            ))}
-          </div>
+          <CategoryMenu categories={categories} />
           <div className="ml-4">
             <ThemeToggle />
           </div>

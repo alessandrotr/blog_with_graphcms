@@ -71,7 +71,7 @@ const PostDetail = ({ post }) => {
   }, [post.votes.length]);
 
   return (
-    <div ref={ref} className="lg:p-8 lg:pt-0 pb-12 mb-8 rounded-lg ">
+    <div ref={ref} className="lg:p-2 lg:pt-0 pb-12 mb-8 rounded-lg ">
       <ReadingBar ref={ref.current} />
       <div className="flex justify-between items-end mb-6">
         <button

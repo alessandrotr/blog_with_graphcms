@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import CategoryBadge from "./ui/CategoryBadge";
 import CreatedAtBadge from "./ui/CreatedAtBadge";
 import CommentsCount from "./ui/CommentsCount";
 import ReadingBar from "./ui/ReadingBar";
+import { submitVote, publishVote, getVotes } from "../services";
 
 const PostDetail = ({ post }) => {
   const ref = useRef();
@@ -62,11 +63,27 @@ const PostDetail = ({ post }) => {
         return modifiedText;
     }
   };
+  const [votes, setVotes] = useState([]);
+
+  useEffect(() => {
+    setVotes(post.votes.length);
+    console.log(votes);
+  }, [post.votes.length]);
 
   return (
     <div ref={ref} className="lg:p-8 lg:pt-0 pb-12 mb-8 rounded-lg ">
       <ReadingBar ref={ref.current} />
       <div className="flex justify-between items-end mb-6">
+        <button
+          onClick={() => {
+            submitVote(post);
+            publishVote();
+            setVotes((prevState) => prevState + 1);
+          }}
+        >
+          Like the post
+        </button>
+        {votes} Likes
         <div className="flex w-6/12">
           <CreatedAtBadge
             postCreatedAt={post.createdAt}

@@ -12,14 +12,14 @@ import {
 } from "../../components";
 import { getPosts, getPostDetails } from "../../services";
 import { AdjacentPosts } from "../../sections";
+// import LikePost from "../../components/LikePost";
 
 const PostDetails = ({ post }) => {
   const router = useRouter();
-
+  console.log(post);
   if (router.isFallback) {
     return <Loader />;
   }
-
   return (
     <>
       <div

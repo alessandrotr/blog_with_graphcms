@@ -21,6 +21,7 @@ export const getPosts = async () => {
             slug
             title
             excerpt
+            id
             comments {
               id
             }
@@ -33,6 +34,9 @@ export const getPosts = async () => {
               color {
                 hex
               }
+            }
+            votes {
+              id
             }
           }
         }
@@ -47,7 +51,7 @@ export const getPosts = async () => {
 
 export const getCategories = async () => {
   const query = gql`
-    query GetGategories {
+    query GetCategories {
       categories {
         name
         slug
@@ -69,6 +73,7 @@ export const getPostDetails = async (slug) => {
       post(where: { slug: $slug }) {
         title
         excerpt
+        id
         comments {
           id
         }
@@ -94,6 +99,9 @@ export const getPostDetails = async (slug) => {
             hex
           }
         }
+        votes {
+          id
+        }
       }
     }
   `;
@@ -111,7 +119,7 @@ export const getSimilarPosts = async (categories, slug) => {
           slug_not: $slug
           AND: { categories_some: { slug_in: $categories } }
         }
-        last: 3
+        last: 4
       ) {
         title
         featuredImage {
@@ -316,12 +324,53 @@ export const getComments = async (slug) => {
   return result.comments;
 };
 
+export const submitVote = async (obj) => {
+  console.log(obj);
+
+  const result = await fetch("/api/upvote", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  });
+
+  return result.json();
+};
+
+export const publishVote = async (obj) => {
+  console.log(obj);
+  const result = await fetch("/api/publishVote", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  });
+
+  return result.json();
+};
+
+export const getVotes = async (slug) => {
+  const query = gql`
+    query GetVotes($slug: String!) {
+      votes(where: { post: { slug: $slug } }) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.votes;
+};
+
 export const getRecentPosts = async () => {
   const query = gql`
     query GetPostDetails() {
       posts(
         orderBy: createdAt_ASC
-        last: 3
+        last: 4
       ) {
         title
         featuredImage {

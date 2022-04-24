@@ -31,7 +31,7 @@ const PostCard = ({ post }) => {
             </p>
           </Link>
           <ExcerptWithOverflow>{post.excerpt}</ExcerptWithOverflow>
-          <ReadMoreButton post={post} customClass="mt-4" />
+          <ReadMoreButton post={post} customClass="mt-4 text-sm" />
         </div>
       </div>
     </div>

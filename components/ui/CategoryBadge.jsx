@@ -5,7 +5,7 @@ function CategoryBadge({ category }) {
   return (
     <Link href={`/category/${category.slug}`}>
       <span
-        className="m-2 px-3 py-2 text-xs cursor-pointer transition duration-500 transform hover:-translate-y-1 inline-block text-secondaryDark font-medium"
+        className="m-2 px-3 py-2 text-xs cursor-pointer transition duration-500 transform hover:-translate-y-1 inline-block text-secondaryDark font-semibold"
         style={{ backgroundColor: category.color.hex }}
       >
         {category.name}

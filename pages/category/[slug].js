@@ -10,12 +10,14 @@ const CategoryPost = ({ posts }) => {
   if (router.isFallback) {
     return <Loader />;
   }
-
   return (
     <div
       style={{ maxWidth: "1100px" }}
       className="container mx-auto px-4 md:px-10 mb-8"
     >
+      {/* {posts.map(post => {
+      <CategoryHeader post={post.node} />
+      })} */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="col-span-1 lg:col-span-8 grid">
           {posts.map((post, index) => (

@@ -20,18 +20,20 @@ const CategoryMenu = ({ categories }) => {
   return (
     <>
       <div
-        className="h-full flex items-center justify-center"
+        onClick={() => setShow(false)}
+        className={`w-full h-full fixed top-0 left-0 z-10 ${
+          show ? "block" : "hidden"
+        }`}
+      />
+      <div
+        className={`h-full flex items-center justify-center transition-all duration-500 z-20 ${
+          show ? "scale-[1.7]" : ""
+        }`}
         onPointerOver={() => setShow(true)}
       >
         <MdCategory
-          className={`text-2xl cursor-pointer z-20 ${
+          className={`text-2xl z-20 ${
             show ? "text-colorItems" : "text-primaryDark dark:text-primaryLight"
-          }`}
-        />
-        <div
-          onPointerUp={() => setShow(false)}
-          className={`w-full h-full fixed top-0 left-0 z-10 ${
-            show ? "block" : "hidden"
           }`}
         />
       </div>

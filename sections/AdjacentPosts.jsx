@@ -15,30 +15,43 @@ const AdjacentPosts = ({ createdAt, slug }) => {
   }, [slug]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-8 gap-12 mb-8">
+    <div className="grid grid-cols-1 lg:grid-cols-8 gap-5 mb-8">
       {dataLoaded && (
         <>
           {adjacentPost.previous && (
-            <div
-              className={`${
-                adjacentPost.next
-                  ? "col-span-1 lg:col-span-4"
-                  : "col-span-1 lg:col-span-8"
-              } adjacent-post rounded-lg relative h-72`}
-            >
-              <AdjacentPostCard post={adjacentPost.previous} position="LEFT" />
-            </div>
+            <>
+              <h3 className="font-semibold mb-4">Previous Post</h3>
+              <div
+                className={`${
+                  adjacentPost.next
+                    ? "col-span-1 lg:col-span-4"
+                    : "col-span-1 lg:col-span-8"
+                } adjacent-post rounded-lg relative h-28`}
+              >
+                <AdjacentPostCard
+                  post={adjacentPost.previous}
+                  position="LEFT"
+                />
+              </div>
+            </>
           )}
           {adjacentPost.next && (
-            <div
-              className={`${
-                adjacentPost.previous
-                  ? "col-span-1 lg:col-span-4"
-                  : "col-span-1 lg:col-span-8"
-              } adjacent-post rounded-lg relative h-72`}
-            >
-              <AdjacentPostCard post={adjacentPost.next} position="RIGHT" />
-            </div>
+            <>
+              <h3 className="font-semibold mt-4 mb-4">Next Post</h3>
+              <div
+                className={`${
+                  adjacentPost.previous
+                    ? "col-span-1 lg:col-span-4"
+                    : "col-span-1 lg:col-span-8"
+                } adjacent-post rounded-lg relative h-28`}
+              >
+                <AdjacentPostCard
+                  post={adjacentPost.next}
+                  position="RIGHT"
+                  right
+                />
+              </div>
+            </>
           )}
         </>
       )}

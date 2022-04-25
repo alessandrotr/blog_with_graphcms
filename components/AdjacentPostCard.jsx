@@ -1,40 +1,56 @@
 import React from "react";
 import Link from "next/link";
 import CreatedAtBadge from "./ui/CreatedAtBadge";
-import ExcerptWithOverflow from "./ui/ExcerptWithOverflow";
 import CommentsCount from "./ui/CommentsCount";
+import CategoryBadge from "./ui/CategoryBadge";
 
-const AdjacentPostCard = ({ post, position }) => {
+const AdjacentPostCard = ({ post, position, right }) => {
+  let categoryColor = post.categories.map((color) => color.color.hex);
+
   return (
     <>
       <div
-        className="absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72"
+        className="absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-28"
         style={{ backgroundImage: `url('${post.featuredImage.url}')` }}
       />
-      <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-full h-72" />
-      <div className="flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full px-20">
+      <div className="absolute rounded-lg bg-center bg-gradient-to-b opacity-80 hover:opacity-65 from-gray-400 via-gray-700 to-black w-full h-28" />
+      <div className="flex justify-end absolute left-0 top-0 w-full">
+        <CommentsCount
+          post={post}
+          categoryColor={categoryColor}
+          customClass="pl-4"
+        />
         <CreatedAtBadge
           postCreatedAt={post.createdAt}
-          customClass="absolute left-2 top-2"
+          categoryColor={categoryColor}
+          customClass=""
           showIcon
         />
-        <p className="text-secondaryLight mb-4 text-shadow font-semibold text-2xl">
+        {post.categories.map((category) => (
+          <CategoryBadge key={category.name} category={category} onlyIcon />
+        ))}
+      </div>
+      <div className="flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full px-4">
+        <p
+          style={{ maxWidth: "230px" }}
+          className={`text-secondaryLight mb-2 text-shadow font-semibold text-sm w-3/4 absolute ${
+            right ? "bottom-2 left-3" : "bottom-2 right-3 text-right"
+          }`}
+        >
           {post.title}
         </p>
-        <CommentsCount post={post} customClass="absolute right-2 top-2" />
-
-        <ExcerptWithOverflow featuredPostCard={true}>
-          {post.excerpt}
-        </ExcerptWithOverflow>
       </div>
       <Link href={`/post/${post.slug}`}>
         <span className="z-10 cursor-pointer absolute w-full h-full" />
       </Link>
       {position === "LEFT" && (
-        <div className="absolute  arrow-btn left-0 bottom-0 text-center py-3 cursor-pointer bg-colorItems flex justify-center">
+        <div
+          style={{ color: categoryColor }}
+          className="absolute arrow-btn left-0 bottom-0 text-center cursor-pointer py-2 bg-primaryDarkOpacity flex justify-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-white w-full"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -49,10 +65,13 @@ const AdjacentPostCard = ({ post, position }) => {
         </div>
       )}
       {position === "RIGHT" && (
-        <div className="absolute  arrow-btn right-0 bottom-0 text-center py-3 cursor-pointer bg-colorItems flex justify-center">
+        <div
+          style={{ color: categoryColor }}
+          className="absolute arrow-btn right-0 bottom-0 text-center cursor-pointer py-2 bg-primaryDarkOpacity flex justify-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-white w-full"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

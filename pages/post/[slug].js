@@ -12,11 +12,16 @@ import {
 } from "../../components";
 import { getPosts, getPostDetails } from "../../services";
 import { AdjacentPosts } from "../../sections";
-// import LikePost from "../../components/LikePost";
+
+import store from "../../appStore";
+import { useSnapshot } from "valtio";
+
+import VoteButton from "../../components/ui/VoteButton";
 
 const PostDetails = ({ post }) => {
+  const snap = useSnapshot(store);
+
   const router = useRouter();
-  console.log(post);
   if (router.isFallback) {
     return <Loader />;
   }
@@ -32,15 +37,20 @@ const PostDetails = ({ post }) => {
             {/* <Author author={post.author} /> */}
             <CommentsForm slug={post.slug} />
             <Comments slug={post.slug} />
-            <AdjacentPosts slug={post.slug} createdAt={post.createdAt} />
           </div>
           <div className="col-span-1 lg:col-span-4">
-            <div className="relative lg:sticky top-24">
+            <AdjacentPosts slug={post.slug} createdAt={post.createdAt} />
+            <div
+              className={`relative lg:sticky transition-all duration-500 ${
+                snap.headerVisible ? "lg:top-24" : "lg:top-8"
+              }`}
+            >
               <PostWidget
                 slug={post.slug}
                 categories={post.categories.map((category) => category.slug)}
               />
-              <Categories />
+              <VoteButton post={post} />
+              {/* <Categories /> */}
             </div>
           </div>
         </div>

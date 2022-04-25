@@ -58,6 +58,9 @@ export const getCategories = async () => {
         color {
           hex
         }
+        featuredImage {
+          url
+        }
       }
     }
   `;
@@ -98,6 +101,9 @@ export const getPostDetails = async (slug) => {
           color {
             hex
           }
+          featuredImage {
+            url
+          }
         }
         votes {
           id
@@ -130,6 +136,13 @@ export const getSimilarPosts = async (categories, slug) => {
         comments {
           id
         }
+        categories {
+          slug
+          name
+          color {
+            hex
+          }
+        }
       }
     }
   `;
@@ -156,6 +169,13 @@ export const getAdjacentPosts = async (createdAt, slug) => {
         comments {
           id
         }
+        categories {
+          slug
+          name
+          color {
+            hex
+          }
+        }
       }
       previous: posts(
         first: 1
@@ -171,6 +191,13 @@ export const getAdjacentPosts = async (createdAt, slug) => {
         excerpt
         comments {
           id
+        }
+        categories {
+          slug
+          name
+          color {
+            hex
+          }
         }
       }
     }
@@ -212,6 +239,9 @@ export const getCategoryPost = async (slug) => {
               color {
                 hex
               }
+              featuredImage {
+                url
+              }
             }
           }
         }
@@ -250,6 +280,9 @@ export const getFeaturedPosts = async () => {
           color {
             hex
           }
+          featuredImage {
+            url
+          }
         }
       }
     }   
@@ -285,6 +318,9 @@ export const getPrincipalPost = async () => {
           slug
           color {
             hex
+          }
+          featuredImage {
+            url
           }
         }
       }
@@ -325,8 +361,6 @@ export const getComments = async (slug) => {
 };
 
 export const submitVote = async (obj) => {
-  console.log(obj);
-
   const result = await fetch("/api/upvote", {
     method: "POST",
     headers: {
@@ -339,7 +373,6 @@ export const submitVote = async (obj) => {
 };
 
 export const publishVote = async (obj) => {
-  console.log(obj);
   const result = await fetch("/api/publishVote", {
     method: "PUT",
     headers: {
@@ -380,6 +413,13 @@ export const getRecentPosts = async () => {
         slug
         comments {
           id
+        }
+        categories {
+          name
+          slug
+          color {
+            hex
+          }
         }
       }
     }

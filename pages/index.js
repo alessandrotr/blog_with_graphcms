@@ -2,8 +2,12 @@ import Head from "next/head";
 import { PostCard, Categories, PostWidget } from "../components";
 import { getPosts } from "../services";
 import { FeaturedPosts } from "../sections";
+import store from "../appStore";
+import { useSnapshot } from "valtio";
 
 export default function Home({ posts }) {
+  const snap = useSnapshot(store);
+
   return (
     <div
       style={{ maxWidth: "1100px" }}
@@ -29,9 +33,13 @@ export default function Home({ posts }) {
         </div>
 
         <div className="lg:col-span-4 col-span-1">
-          <div className="lg:sticky relative top-20">
+          <div
+            className={`relative lg:sticky transition-all duration-500 ${
+              snap.headerVisible ? "lg:top-24" : "lg:top-8"
+            }`}
+          >
             <PostWidget />
-            <Categories />
+            {/* <Categories /> */}
           </div>
         </div>
       </div>

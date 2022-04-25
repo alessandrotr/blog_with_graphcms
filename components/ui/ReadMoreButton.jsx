@@ -6,10 +6,13 @@ const ReadMoreButton = (props) => {
   return (
     <div className={` ${props.customClass}`}>
       <Link href={`/post/${props.post.slug}`}>
-        <span className="cursor-pointer flex items-center">
-          <GiRead className="text-colorItems mr-3 text-3xl" />
-          <span className="text-primaryDark dark:text-primaryLight border-b border-transparent hover:border-colorItems">
-            Read more...
+        <span className="font-semibold text-xs cursor-pointer flex items-center bg-secondaryDark max-w-max p-2 px-3">
+          <GiRead
+            style={{ color: props.categoryColor }}
+            className=" mr-3 text-xl"
+          />
+          <span className="text-primaryLight border-b border-transparent hover:border-colorItems">
+            Read more
           </span>
         </span>
       </Link>

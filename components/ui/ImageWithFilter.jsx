@@ -22,7 +22,7 @@ const ImageWithFilter = (props) => {
         backgroundImage: `url('${props.post.featuredImage.url}')`,
       }}
     >
-      <div className="absolute bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-4/12 h-24" />
+      <div className="absolute bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black h-24" />
     </div>
   ) : props.featuredPost ? (
     <div

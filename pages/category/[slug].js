@@ -4,7 +4,12 @@ import { useRouter } from "next/router";
 import { getCategories, getCategoryPost } from "../../services";
 import { PostCard, Categories, Loader } from "../../components";
 
+import store from "../../appStore";
+import { useSnapshot } from "valtio";
+
 const CategoryPost = ({ posts }) => {
+  const snap = useSnapshot(store);
+
   const router = useRouter();
 
   if (router.isFallback) {
@@ -25,7 +30,11 @@ const CategoryPost = ({ posts }) => {
           ))}
         </div>
         <div className="col-span-1 lg:col-span-4">
-          <div className="relative lg:sticky top-24">
+          <div
+            className={`relative lg:sticky transition-all duration-500 ${
+              snap.headerVisible ? "lg:top-24" : "lg:top-8"
+            }`}
+          >
             <Categories />
           </div>
         </div>

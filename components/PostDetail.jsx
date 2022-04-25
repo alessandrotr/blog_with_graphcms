@@ -2,11 +2,11 @@ import React, { useRef, useState, useEffect } from "react";
 import CategoryBadge from "./ui/CategoryBadge";
 import CreatedAtBadge from "./ui/CreatedAtBadge";
 import CommentsCount from "./ui/CommentsCount";
-import ReadingBar from "./ui/ReadingBar";
-import { submitVote, publishVote, getVotes } from "../services";
+import ReadingProgress from "./ReadingProgress/readingProgress";
+import VotesBadge from "./ui/VotesBadge";
 
 const PostDetail = ({ post }) => {
-  const ref = useRef();
+  const target = useRef();
   const getContentFragment = (index, text, obj, type) => {
     let modifiedText = text;
 
@@ -63,63 +63,57 @@ const PostDetail = ({ post }) => {
         return modifiedText;
     }
   };
+
+  let categoryColor = post.categories.map((color) => color.color.hex);
+
   const [votes, setVotes] = useState([]);
 
   useEffect(() => {
     setVotes(post.votes.length);
-    console.log(votes);
   }, [post.votes.length]);
 
   return (
-    <div ref={ref} className="lg:p-2 lg:pt-0 pb-12 mb-8 rounded-lg ">
-      <ReadingBar ref={ref.current} />
-      <div className="flex justify-between items-end mb-6">
-        <button
-          onClick={() => {
-            submitVote(post);
-            publishVote();
-            setVotes((prevState) => prevState + 1);
-          }}
-        >
-          Like the post
-        </button>
-        {votes} Likes
-        <div className="flex w-6/12">
+    <>
+      <ReadingProgress target={target} />
+      <div ref={target} className="lg:p-2 lg:pt-0 pb-12 mb-8 rounded-lg ">
+        <div className="flex mb-6">
+          {post.categories.map((category) => (
+            <CategoryBadge key={category.name} category={category} />
+          ))}
           <CreatedAtBadge
             postCreatedAt={post.createdAt}
+            categoryColor={categoryColor}
+            customClass=""
             showIcon
-            className=""
           />
-          <CommentsCount post={post} customClass="" iconClass="text-sm" />
+          <CommentsCount post={post} categoryColor={categoryColor} />
+          <VotesBadge categoryColor={categoryColor} votes={votes} />
         </div>
-        <div>
-          {post.categories.map((category) => {
-            return <CategoryBadge key={category.name} category={category} />;
+        <h1 className="mb-8 text-4xl font-semibold leading-normal">
+          {post.title}
+        </h1>
+        <p className="mb-8 text-lg font-normal leading-normal">
+          {post.excerpt}
+        </p>
+        <div className="relative overflow-hidden shadow-md mb-6">
+          <img
+            src={post.featuredImage.url}
+            alt={post.title}
+            className="object-top h-full w-full"
+          />
+        </div>
+        <div className="px-4 lg:px-0">
+          <div className="flex items-center mb-8 w-full"></div>
+          {post.content.raw.children.map((typeObj, index) => {
+            const children = typeObj.children.map((item, itemIndex) =>
+              getContentFragment(itemIndex, item.text, item)
+            );
+
+            return getContentFragment(index, children, typeObj, typeObj.type);
           })}
         </div>
       </div>
-      <h1 className="mb-8 text-4xl font-semibold leading-normal">
-        {post.title}
-      </h1>
-      <p className="mb-8 text-lg font-normal leading-normal">{post.excerpt}</p>
-      <div className="relative overflow-hidden shadow-md mb-6">
-        <img
-          src={post.featuredImage.url}
-          alt={post.title}
-          className="object-top h-full w-full"
-        />
-      </div>
-      <div className="px-4 lg:px-0">
-        <div className="flex items-center mb-8 w-full"></div>
-        {post.content.raw.children.map((typeObj, index) => {
-          const children = typeObj.children.map((item, itemIndex) =>
-            getContentFragment(itemIndex, item.text, item)
-          );
-
-          return getContentFragment(index, children, typeObj, typeObj.type);
-        })}
-      </div>
-    </div>
+    </>
   );
 };
 

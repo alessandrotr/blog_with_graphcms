@@ -1,14 +1,45 @@
 import React from "react";
 import Link from "next/link";
+import { MdCardTravel } from "react-icons/md";
+import { FaReact, FaDev } from "react-icons/fa";
+import { FcSportsMode } from "react-icons/fc";
+import { HiLibrary } from "react-icons/hi";
 
-function CategoryBadge({ category }) {
+function CategoryBadge(props) {
   return (
-    <Link href={`/category/${category.slug}`}>
+    <Link href={`/category/${props.category.slug}`}>
       <span
-        className="m-2 px-3 py-2 text-xs cursor-pointer transition duration-500 transform hover:-translate-y-1 inline-block text-secondaryDark font-semibold"
-        style={{ backgroundColor: category.color.hex }}
+        className={`cursor-pointer font-semibold text-xs p-2 flex items-center text-primaryLight bg-primaryDarkOpacity`}
+        style={{ color: props.category.color.hex }}
       >
-        {category.name}
+        {props.category.slug === "travel" ? (
+          <MdCardTravel
+            style={{ color: props.category.color.hex }}
+            className="h-5 w-5 inline mr-2 text-colorItems"
+          />
+        ) : props.category.slug === "react" ? (
+          <FaReact
+            style={{ color: props.category.color.hex }}
+            className="h-5 w-5 inline mr-2 text-colorItems"
+          />
+        ) : props.category.slug === "webdev" ? (
+          <FaDev
+            style={{ color: props.category.color.hex }}
+            className="h-5 w-5 inline mr-2 text-colorItems"
+          />
+        ) : props.category.slug === "sport" ? (
+          <FcSportsMode
+            style={{ color: props.category.color.hex }}
+            className="h-5 w-5 inline mr-2 text-colorItems"
+          />
+        ) : props.category.slug === "politics" ? (
+          <HiLibrary
+            style={{ color: props.category.color.hex }}
+            className="h-5 w-5 inline mr-2 text-colorItems"
+          />
+        ) : null}
+
+        {!props.onlyIcon && props.category.name}
       </span>
     </Link>
   );

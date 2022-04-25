@@ -5,10 +5,11 @@ const CommentsCount = (props) => {
   return (
     <p
       style={{ lineHeight: "20px" }}
-      className={`max-w-max flex justify-center items-center bg-primaryLightOpacity dark:bg-primaryDarkOpacity text-primaryDark dark:text-primaryLight p-2 ${props.customClass}`}
+      className={`max-w-max flex justify-center items-center bg-primaryDarkOpacity text-primaryLight p-2 font-semibold text-xs ${props.customClass}`}
     >
       <FaRegComments
-        className={`text-base mr-2 text-colorItems ${props.iconClass}`}
+        style={{ color: props.categoryColor }}
+        className={`h-5 w-5 inline mr-2 ${props.iconClass}`}
       />
       {props.post.comments.length}
     </p>

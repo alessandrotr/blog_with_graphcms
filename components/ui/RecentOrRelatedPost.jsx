@@ -3,31 +3,44 @@ import Link from "next/link";
 import CreatedAtBadge from "./CreatedAtBadge";
 import CommentsCount from "./CommentsCount";
 import ImageWithFilter from "./ImageWithFilter";
+import CategoryBadge from "./CategoryBadge";
 
 const RecentOrRelatedPost = ({ post }) => {
-  return (
-    <Link href={`/post/${post.slug}`}>
-      <div
-        key={post.title}
-        className="flex items-center w-full mb-8 bg-secondaryLight hover:bg-primaryLight dark:bg-secondaryDark dark:hover:bg-primaryDark shadow-lg cursor-pointer"
-      >
-        <CreatedAtBadge
-          postCreatedAt={post.createdAt}
-          customClass="absolute -right-1 px-2 -mt-24"
-          showIcon
-        />
-        <ImageWithFilter small post={post} />
+  let categoryColor = post.categories.map((color) => color.color.hex);
 
-        <div className="inline align-middle font-medium titleRelatedPostOverflow w-8/12 px-4 text-sm leading-normal">
-          {post.title}
+  return (
+    <>
+      <Link href={`/post/${post.slug}`}>
+        <div
+          key={post.title}
+          className="flex items-center w-full bg-secondaryLight hover:bg-primaryLight dark:bg-secondaryDark dark:hover:bg-primaryDark shadow-lg cursor-pointer"
+        >
+          <ImageWithFilter small post={post} />
+
+          <div className="inline align-middle font-medium titleRelatedPostOverflow w-8/12 px-4 text-sm leading-normal">
+            {post.title}
+          </div>
         </div>
+      </Link>
+      <div className="flex w-full justify-end mb-5">
         <CommentsCount
           post={post}
-          customClass="absolute left-0 -mb-16 mt-1 text-xs px-2 py-1"
+          customClass="text-xs px-2 py-1"
           iconClass="text-sm"
+          categoryColor={categoryColor}
         />
+        <CreatedAtBadge
+          postCreatedAt={post.createdAt}
+          customClass="px-2 "
+          showIcon
+          categoryColor={categoryColor}
+          post={post}
+        />
+        {post.categories.map((category) => (
+          <CategoryBadge key={category.name} category={category} onlyIcon />
+        ))}
       </div>
-    </Link>
+    </>
   );
 };
 

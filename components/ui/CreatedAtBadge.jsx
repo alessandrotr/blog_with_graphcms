@@ -6,10 +6,13 @@ import { MdOutlineDateRange } from "react-icons/md";
 const CreatedAtBadge = (props) => {
   return (
     <p
-      className={`font-semibold text-xs p-2 flex items-center text-primaryDark dark:text-primaryLight bg-primaryLightOpacity dark:bg-primaryDarkOpacity ${props.customClass}`}
+      className={`font-semibold text-xs p-2 flex items-center text-primaryLight bg-primaryDarkOpacity ${props.customClass}`}
     >
       {props.showIcon && (
-        <MdOutlineDateRange className="h-5 w-5 inline mr-2 text-colorItems" />
+        <MdOutlineDateRange
+          style={{ color: props.categoryColor }}
+          className="h-5 w-5 inline mr-2"
+        />
       )}
       {moment(props.postCreatedAt).format("MMM DD, YYYY")}
     </p>

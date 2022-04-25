@@ -6,13 +6,13 @@
 
 :root {
   --color-primary-light: #d1d1d1;
-  --color-primary-light-opacity: rgba(209, 209, 209, 0.9);
+  --color-primary-light-opacity: rgba(209, 209, 209, 0.95);
   --color-secondary-light: #e1e1e1;
 
   --color-items: #5865f2;
 
   --color-primary-dark: #202225;
-  --color-primary-dark-opacity: rgba(32, 34, 37, 0.9);
+  --color-primary-dark-opacity: rgba(32, 34, 37, 0.95);
   --color-secondary-dark: #29292d;
 }
 
@@ -101,16 +101,19 @@ a {
   -webkit-box-orient: vertical;
 }
 
-.readingBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 6px;
-  border-radius: 0px 2px 0px 0px;
-  background: linear-gradient(
-    90deg,
-    rgba(109, 227, 219, 1) 0%,
-    rgba(132, 115, 177, 1) 100%,
-    rgba(3, 9, 112, 1) 100%
-  );
+.scrollSection {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #5865f2 #333;
+}
+
+.scrollSection::-webkit-scrollbar {
+  /* Google Chrome */
+  width: 0.5vw;
+  background-color: #333;
+}
+
+.scrollSection::-webkit-scrollbar-thumb {
+  /* Google Chrome */
+  background-color: #5865f2;
+  border-radius: 9999px;
 }

@@ -9,21 +9,28 @@ import ImageWithFilter from "./ui/ImageWithFilter";
 import ReadMoreButton from "./ui/ReadMoreButton";
 
 const PrincipalPostCard = ({ post }) => {
+  let categoryColor = post.categories.map((color) => color.color.hex);
+
   return (
     <div className="relative h-96 flex items-end">
       <ImageWithFilter post={post} big />
-      <CommentsCount post={post} customClass="absolute left-2 top-12" />
-      <CreatedAtBadge
-        postCreatedAt={post.createdAt}
-        customClass="absolute left-2 top-2"
-        showIcon
-      />
-      <p className="text-secondaryDark font-medium absolute left-1 bottom-1">
+      <div className="flex justify-start absolute left-0 bottom-0 w-full">
         {post.categories.map((category) => (
           <CategoryBadge key={category.name} category={category} />
         ))}
-      </p>
-      <div className="flex flex-col py-12 px-10 justify-center w-6/12 z-10 shadow-lg">
+        <CreatedAtBadge
+          postCreatedAt={post.createdAt}
+          categoryColor={categoryColor}
+          customClass=""
+          showIcon
+        />
+        <CommentsCount
+          post={post}
+          categoryColor={categoryColor}
+          customClass="pr-4"
+        />
+      </div>
+      <div className="flex flex-col py-12 pb-20 px-10 justify-center w-6/12 z-10 shadow-lg">
         <Link href={`/post/${post.slug}`}>
           <p className=" leading-relaxed text-secondaryDark dark:text-secondaryLight cursor-pointer mb-4 font-semibold text-2xl lg:text-4xl underline decoration-transparent hover:decoration-[#5865f2]">
             {post.title}
@@ -32,7 +39,11 @@ const PrincipalPostCard = ({ post }) => {
         <span className="pr-24">
           <ExcerptWithOverflow>{post.excerpt}</ExcerptWithOverflow>
         </span>
-        <ReadMoreButton post={post} customClass="mt-8" />
+        <ReadMoreButton
+          categoryColor={categoryColor}
+          post={post}
+          customClass="mt-8 absolute w-full flex justify-end bottom-0 left-0"
+        />
       </div>
     </div>
   );

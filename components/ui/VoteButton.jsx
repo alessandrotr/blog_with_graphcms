@@ -20,7 +20,7 @@ const VoteButton = ({ post }) => {
   };
 
   return (
-    <div className="mt-10 h-24 flex justify-center items-center">
+    <div className="mt-10 h-24 flex justify-center items-center z-20">
       <button
         disabled={clicked}
         onClick={() => {

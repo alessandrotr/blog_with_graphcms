@@ -32,7 +32,7 @@ const ReadingProgress = ({ target }) => {
   return (
     <>
       <div
-        className={`fixed h-1 top-0 left-0 z-20 bg-colorItems transition-opacity duration-500`}
+        className={`fixed h-1 top-0 left-0 bg-colorItems transition-opacity duration-500`}
         style={{
           width: `${readingProgress}%`,
           opacity: readingProgress >= 100 ? 0 : 1,
@@ -43,16 +43,16 @@ const ReadingProgress = ({ target }) => {
           maxWidth: "1100px",
           opacity: readingProgress >= 100 ? 0 : readingProgress <= 26 ? 0 : 1,
         }}
-        className="trasition-all duration-500 fixed inset-1/2x flex justify-end bottom-36 w-full z-50"
+        className="trasition-all duration-500 fixed inset-1/2x flex justify-end bottom-36 w-full"
       >
         <div
-          style={{ width: "330px" }}
+          style={{ width: "330px", userSelect: "none" }}
           className="p-4 flex items-center justify-center"
         >
           <FcReading className="text-6xl" />
 
           <span
-            style={{ marginLeft: "6.4rem" }}
+            style={{ marginLeft: "6.4rem", userSelect: "none" }}
             className="absolute flex items-center"
           >
             {readingProgress.toFixed()}

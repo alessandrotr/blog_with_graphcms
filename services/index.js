@@ -125,7 +125,7 @@ export const getSimilarPosts = async (categories, slug) => {
           slug_not: $slug
           AND: { categories_some: { slug_in: $categories } }
         }
-        last: 4
+        last: 3
       ) {
         title
         featuredImage {
@@ -403,7 +403,7 @@ export const getRecentPosts = async () => {
     query GetPostDetails() {
       posts(
         orderBy: createdAt_ASC
-        last: 4
+        last: 3
       ) {
         title
         featuredImage {

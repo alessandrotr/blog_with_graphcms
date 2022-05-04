@@ -10,34 +10,43 @@ const FeaturedPostCard = ({ post }) => {
   let categoryColor = post.categories.map((color) => color.color.hex);
 
   return (
-    <div className="relative h-72">
-      <ImageWithFilter post={post} featuredPost />
-      <div className="flex justify-end absolute left-0 bottom-0 w-full">
-        <CommentsCount
-          post={post}
-          categoryColor={categoryColor}
-          customClass="pl-4"
-        />
-        <CreatedAtBadge
-          postCreatedAt={post.createdAt}
-          categoryColor={categoryColor}
-          customClass=""
-          showIcon
-        />
+    <div className="relative h-80">
+      <ImageWithFilter featuredPost post={post} />
+
+      <div className="flex flex-col rounded-lg pt-4 pt-0 justify-center absolute">
         {post.categories.map((category) => (
-          <CategoryBadge key={category.name} category={category} />
+          <CategoryBadge
+            key={category.name}
+            category={category}
+            customClass=" -mt-6 mb-4 bg-colorItems2 text-primaryDark p-1 max-w-max uppercase font-medium"
+          />
         ))}
-      </div>
-      <div className="flex flex-col rounded-lg p-4 pt-0 justify-center absolute w-full h-full px-20">
-        <p className="text-secondaryLight mb-2 text-shadow font-semibold text-2xl leading-normal text-center">
+        <p className="text-secondaryLight mb-2 font-medium text-xl leading-normal">
           {post.title}
         </p>
-        <ExcerptWithOverflow textCentered featuredPostCard={true}>
+        <ExcerptWithOverflow
+          featuredPostCard={true}
+          lineClamp="2"
+          customClass="text-xs text-secondaryLight"
+        >
           {post.excerpt}
         </ExcerptWithOverflow>
+        <div className="flex mt-3 items-center text-secondaryLight">
+          <CreatedAtBadge
+            postCreatedAt={post.createdAt}
+            categoryColor={categoryColor}
+            customClass="mr-2 text-secondaryLight font-normal text-xs"
+          />
+          |
+          <CommentsCount
+            post={post}
+            categoryColor={categoryColor}
+            customClass="ml-2 text-secondaryLight text-xs"
+          />
+        </div>
       </div>
       <Link href={`/post/${post.slug}`}>
-        <span className="cursor-pointer absolute w-full h-full" />
+        <span className="cursor-pointer absolute w-full h-full top-0" />
       </Link>
     </div>
   );

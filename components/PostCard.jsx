@@ -14,36 +14,47 @@ const PostCard = ({ post }) => {
   return (
     <div className="relative h-72 flex mb-12 items-end">
       <ImageWithFilter medium post={post} />
-      <div className="flex justify-start absolute left-0 bottom-0 w-full">
+      <div className="flex flex-col px-8 justify-center w-6/12 z-10 h-full">
         {post.categories.map((category) => (
-          <CategoryBadge key={category.name} category={category} />
+          <CategoryBadge
+            key={category.name}
+            category={category}
+            customClass="bg-colorItems2 text-primaryDark p-1 mb-4 uppercase max-w-max font-medium"
+          />
         ))}
-        <CreatedAtBadge
-          postCreatedAt={post.createdAt}
-          categoryColor={categoryColor}
-          customClass=""
-          showIcon
-        />
-        <CommentsCount
-          post={post}
-          categoryColor={categoryColor}
-          customClass="pr-4"
-        />
-      </div>
-      <div className="flex flex-col w-full w-2/4">
-        <div className="flex flex-col py-10 px-8 pb-20 justify-center w-full h-8/12 z-10 shadow-lg">
-          <Link href={`/post/${post.slug}`}>
-            <p className="leading-normal text-secondaryDark dark:text-secondaryLight cursor-pointer mb-4 font-semibold lg:text-xl underline decoration-transparent hover:decoration-[#5865f2]">
-              {post.title}
-            </p>
-          </Link>
-          <ExcerptWithOverflow>{post.excerpt}</ExcerptWithOverflow>
-          <ReadMoreButton
+
+        <Link href={`/post/${post.slug}`}>
+          <h2 className=" leading-normal text-primaryDark dark:text-secondaryLight cursor-pointer mb-4 font-medium underline decoration-transparent hover:decoration-[#5865f2] text-xl">
+            {post.title}
+          </h2>
+        </Link>
+        <span className="pr-18">
+          <ExcerptWithOverflow
+            featuredPostCard={true}
+            lineClamp="3"
+            customClass="text-xs text-primaryDark dark:text-secondaryLight"
+          >
+            {post.excerpt}
+          </ExcerptWithOverflow>
+        </span>
+        <div className="flex mt-3 items-center text-primaryDark dark:text-secondaryLight">
+          <CreatedAtBadge
+            postCreatedAt={post.createdAt}
             categoryColor={categoryColor}
+            customClass="mr-2 text-primaryDark dark:text-secondaryLight font-normal text-xs"
+          />
+          |
+          <CommentsCount
             post={post}
-            customClass="mt-4 text-sm absolute w-full left-0 flex items-end justify-end bottom-0"
+            categoryColor={categoryColor}
+            customClass="ml-2 text-primaryDark dark:text-secondaryLight text-xs"
           />
         </div>
+        {/* <ReadMoreButton
+          categoryColor={categoryColor}
+          post={post}
+          customClass="mt-8 absolute w-full flex justify-end bottom-0 left-0"
+        /> */}
       </div>
     </div>
   );

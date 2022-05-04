@@ -23,22 +23,27 @@ const RecentOrRelatedPost = ({ post }) => {
         </div>
       </Link>
       <div className="flex w-full justify-end mb-5">
-        <CommentsCount
-          post={post}
-          customClass="text-xs px-2 py-1"
-          iconClass="text-sm"
-          categoryColor={categoryColor}
-        />
-        <CreatedAtBadge
-          postCreatedAt={post.createdAt}
-          customClass="px-2 "
-          showIcon
-          categoryColor={categoryColor}
-          post={post}
-        />
-        {post.categories.map((category) => (
-          <CategoryBadge key={category.name} category={category} onlyIcon />
-        ))}
+        <div className="flex mt-3 items-center text-secondaryDark dark:text-secondaryLight">
+          <CreatedAtBadge
+            postCreatedAt={post.createdAt}
+            categoryColor={categoryColor}
+            customClass="mr-2 text-secondaryDark dark:text-secondaryLight font-normal text-xs"
+          />
+          |
+          <CommentsCount
+            post={post}
+            categoryColor={categoryColor}
+            customClass="mx-2 text-secondaryDark dark:text-secondaryLight text-xs"
+          />
+          |
+          {post.categories.map((category) => (
+            <CategoryBadge
+              key={category.name}
+              category={category}
+              customClass="mx-2 text-secondaryDark dark:text-secondaryLight text-xs"
+            />
+          ))}
+        </div>
       </div>
     </>
   );

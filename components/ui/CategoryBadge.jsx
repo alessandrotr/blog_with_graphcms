@@ -9,35 +9,19 @@ function CategoryBadge(props) {
   return (
     <Link href={`/category/${props.category.slug}`}>
       <span
-        className={`cursor-pointer font-semibold text-xs p-2 flex items-center text-primaryLight bg-primaryDarkOpacity`}
-        style={{ color: props.category.color.hex }}
+        className={`cursor-pointer text-xs flex items-center ${props.customClass}`}
       >
-        {props.category.slug === "travel" ? (
-          <MdCardTravel
-            style={{ color: props.category.color.hex }}
-            className="h-5 w-5 inline mr-2 text-colorItems"
-          />
+        {/* {props.category.slug === "travel" ? (
+          <MdCardTravel className="h-5 w-5 inline mr-2" />
         ) : props.category.slug === "react" ? (
-          <FaReact
-            style={{ color: props.category.color.hex }}
-            className="h-5 w-5 inline mr-2 text-colorItems"
-          />
+          <FaReact className="h-5 w-5 inline mr-2" />
         ) : props.category.slug === "webdev" ? (
-          <FaDev
-            style={{ color: props.category.color.hex }}
-            className="h-5 w-5 inline mr-2 text-colorItems"
-          />
+          <FaDev className="h-5 w-5 inline mr-2" />
         ) : props.category.slug === "sport" ? (
-          <FcSportsMode
-            style={{ color: props.category.color.hex }}
-            className="h-5 w-5 inline mr-2 text-colorItems"
-          />
+          <FcSportsMode className="h-5 w-5 inline mr-2" />
         ) : props.category.slug === "politics" ? (
-          <HiLibrary
-            style={{ color: props.category.color.hex }}
-            className="h-5 w-5 inline mr-2 text-colorItems"
-          />
-        ) : null}
+          <HiLibrary className="h-5 w-5 inline mr-2" />
+        ) : null} */}
 
         {!props.onlyIcon && props.category.name}
       </span>

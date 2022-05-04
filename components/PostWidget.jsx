@@ -20,10 +20,7 @@ const PostWidget = ({ categories, slug }) => {
       <h3 className="font-semibold mb-5">
         {slug ? "Related Posts" : "Recent Posts"}
       </h3>
-      <div
-        className="scrollSection"
-        style={{ maxHeight: "430px", overflow: "auto" }}
-      >
+      <div style={{ maxHeight: "430px" }}>
         {relatedPosts.map((post) => (
           <RecentOrRelatedPost key={post.title} post={post} />
         ))}

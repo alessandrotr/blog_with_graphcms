@@ -8,11 +8,11 @@ import { getFeaturedPosts, getPrincipalPost } from "../services";
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 1024 },
-    items: 2,
+    items: 3,
   },
   desktop: {
     breakpoint: { max: 1024, min: 768 },
-    items: 2,
+    items: 3,
   },
   tablet: {
     breakpoint: { max: 768, min: 640 },
@@ -27,6 +27,7 @@ const responsive = {
 const FeaturedPosts = () => {
   const [featuredPosts, setFeaturedPosts] = useState([]);
   const [principalPost, setPrincipalPost] = useState([]);
+  const [backgroundPrincipalPost, setBackgroundPrincipalPost] = useState("");
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
@@ -42,16 +43,27 @@ const FeaturedPosts = () => {
       setDataLoaded(true);
     });
   }, []);
+
+  useEffect(() => {
+    const image = principalPost.map((pp) => pp.featuredImage.url);
+    setBackgroundPrincipalPost(image);
+  }, [principalPost]);
+
   const customLeftArrow = (
     <div
       style={{
-        height: "50px",
+        width: "35px",
+        height: "35px",
       }}
-      className="absolute arrow-btn left-0 text-center cursor-pointer bg-primaryDarkOpacity flex justify-center items-center"
+      className="absolute arrow-btn left-0 top-0 text-center cursor-pointer flex justify-center items-center bg-colorItems"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-secondaryLight w-full h-full"
+        className="text-secondaryLight"
+        style={{
+          width: "25px",
+          height: "25px",
+        }}
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -69,16 +81,21 @@ const FeaturedPosts = () => {
   const customRightArrow = (
     <div
       style={{
-        height: "50px",
+        width: "35px",
+        height: "35px",
       }}
-      className="absolute arrow-btn right-0 text-center cursor-pointer  bg-primaryDarkOpacity flex justify-center items-center"
+      className="absolute arrow-btn right-0 top-0 text-center cursor-pointer flex justify-center items-center bg-colorItems"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-secondaryLight w-full"
+        className="text-secondaryLight"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        style={{
+          width: "25px",
+          height: "25px",
+        }}
       >
         <path
           strokeLinecap="round"
@@ -90,7 +107,17 @@ const FeaturedPosts = () => {
     </div>
   );
   return (
-    <div className="mb-8">
+    <div
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(68, 68, 68, 0.75), rgba(88, 101, 242, 0.85)),
+        url("${backgroundPrincipalPost}")`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        marginTop: "-4.6rem",
+        paddingTop: "6rem",
+      }}
+      className="mb-8 p-6"
+    >
       <div className="">
         <div className="mb-6">
           {dataLoaded &&
@@ -103,7 +130,7 @@ const FeaturedPosts = () => {
           customLeftArrow={customLeftArrow}
           customRightArrow={customRightArrow}
           responsive={responsive}
-          itemClass="p-2"
+          itemClass="px-4"
         >
           {dataLoaded &&
             featuredPosts.map((post, index) => (

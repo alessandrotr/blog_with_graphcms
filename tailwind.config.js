@@ -16,6 +16,7 @@ module.exports = {
         secondaryDark: "var(--color-secondary-dark)",
 
         colorItems: "var(--color-items)",
+        colorItems2: "var(--color-items-2)",
       },
       textColor: (theme) => theme("colors"),
       textColor: {
@@ -26,6 +27,7 @@ module.exports = {
         secondaryDark: "var(--color-secondary-dark)",
 
         colorItems: "var(--color-items)",
+        colorItems2: "var(--color-items-2)",
       },
       borderColor: (theme) => theme("colors"),
       borderColor: {
@@ -36,6 +38,7 @@ module.exports = {
         secondaryDark: "var(--color-secondary-dark)",
 
         colorItems: "var(--color-items)",
+        colorItems2: "var(--color-items-2)",
       },
       keyframes: {
         roll: {
@@ -56,5 +59,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

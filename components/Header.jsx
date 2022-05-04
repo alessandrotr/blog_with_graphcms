@@ -22,17 +22,24 @@ function Header() {
   useEffect(() => {
     function onScroll() {
       let currentPosition = window.pageYOffset; // or use document.documentElement.scrollTop;
+
       if (currentPosition > scrollTop) {
         // downscroll code
         setScrolling(false);
         store.headerVisible = false;
         setShow(false);
-      } else {
+        console.log("down");
+      } else if (currentPosition < scrollTop) {
         // upscroll code
         setShow(true);
         store.headerVisible = true;
+        console.log("up");
         setScrolling(true);
       }
+      // else if (currentPosition + scrollTop >= document.body.scrollHeight) {
+      //   console.log("<o");
+      //   alert("you're at the bottom of the page");
+      // }
       setScrollTop(currentPosition <= 0 ? 0 : currentPosition);
     }
 
@@ -47,12 +54,16 @@ function Header() {
         transform: `${show ? "translateY(0)" : "translateY(-100%)"}`,
         opacity: `${show ? 1 : 0}`,
       }}
-      className="z-20 transition-all duration-500 sticky top-0 w-full container mx-auto px-4 md:px-0 mb-8 bg-primaryLight dark:bg-primaryDark shadow-2xl"
+      className={`z-20 transition-all duration-500 sticky top-0 w-full container mx-auto px-4 md:px-0 ${
+        scrollTop > 10
+          ? "bg-primaryLight dark:bg-primaryDark text-secondaryDark dark:text-secondaryLight"
+          : "text-secondaryLight"
+      }`}
     >
       <div className="w-full flex align-center items-center justify-between py-4 px-2">
         <div className="md:float-left block">
           <Link href="/" passHref>
-            <span className="cursor-pointer font-bold text-2xl text-primaryDark dark:text-primaryLight pl-2">
+            <span className="cursor-pointer font-bold text-2xl pl-2">
               The Blog
             </span>
           </Link>

@@ -3,11 +3,11 @@ import moment from "moment";
 
 import { MdOutlineDateRange } from "react-icons/md";
 
+// text-primaryDark dark:text-primaryLight bg-primaryLight dark:bg-primaryDark
+
 const CreatedAtBadge = (props) => {
   return (
-    <p
-      className={`font-semibold text-xs p-2 flex items-center text-primaryLight bg-primaryDarkOpacity ${props.customClass}`}
-    >
+    <p className={`${props.customClass}`}>
       {props.showIcon && (
         <MdOutlineDateRange
           style={{ color: props.categoryColor }}

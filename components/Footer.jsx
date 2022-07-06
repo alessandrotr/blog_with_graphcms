@@ -12,7 +12,7 @@ function Footer() {
   return (
     <div
       style={{ maxWidth: "1100px" }}
-      className="container mx-auto px-4 md:px-0 mt-20 md:mt-10"
+      className="container mx-auto px-4 md:px-0 mt-20 md:mt-0"
     >
       <div className="w-full inline-block py-8 px-2">
         <div className="md:float-left block">

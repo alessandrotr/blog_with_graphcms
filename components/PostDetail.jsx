@@ -89,18 +89,18 @@ const PostDetail = ({ post }) => {
           <CommentsCount post={post} categoryColor={categoryColor} />
           <VotesBadge categoryColor={categoryColor} votes={votes} />
         </div>
-        <h1 className="mb-8 text-4xl font-semibold leading-normal">
-          {post.title}
-        </h1>
-        <p className="mb-8 text-lg font-normal leading-normal">
-          {post.excerpt}
-        </p>
-        <div className="relative overflow-hidden shadow-md mb-6">
-          <img
-            src={post.featuredImage.url}
-            alt={post.title}
-            className="object-top h-full w-full"
-          />
+        <div
+          className="bg-cover"
+          style={{ backgroundImage: `url("${post.featuredImage.url}")` }}
+        >
+          <div className="bg-center bg-gradient-to-b from-gray-400 via-gray-700 to-black p-4">
+            <h1 className="mb-8 text-6xl font-semibold leading-normal pr-8">
+              {post.title}
+            </h1>
+            <p className="mb-8 text-lg font-normal leading-normal">
+              {post.excerpt}
+            </p>
+          </div>
         </div>
         <div className="px-4 lg:px-0">
           <div className="flex items-center mb-8 w-full"></div>

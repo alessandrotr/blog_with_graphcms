@@ -8,7 +8,7 @@ import { HiLibrary } from "react-icons/hi";
 function CategoryBadge(props) {
   return (
     <Link href={`/category/${props.category.slug}`}>
-      <span
+      <p
         className={`cursor-pointer text-xs flex items-center ${props.customClass}`}
       >
         {/* {props.category.slug === "travel" ? (
@@ -24,7 +24,7 @@ function CategoryBadge(props) {
         ) : null} */}
 
         {!props.onlyIcon && props.category.name}
-      </span>
+      </p>
     </Link>
   );
 }

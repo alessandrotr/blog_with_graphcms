@@ -5,6 +5,8 @@ import "react-multi-carousel/lib/styles.css";
 import { FeaturedPostCard, PrincipalPostCard } from "../components";
 import { getFeaturedPosts, getPrincipalPost } from "../services";
 
+import { useSpring, animated, config, easings } from "react-spring";
+
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 1024 },
@@ -29,6 +31,27 @@ const FeaturedPosts = () => {
   const [principalPost, setPrincipalPost] = useState([]);
   const [backgroundPrincipalPost, setBackgroundPrincipalPost] = useState("");
   const [dataLoaded, setDataLoaded] = useState(false);
+
+  const [hover, setHover] = useState(false);
+
+  const [style, animate] = useSpring(
+    () => ({
+      config: config.molasses,
+      backgroundImage: `linear-gradient(to bottom, rgba(68, 68, 68, 0.45), rgba(88, 101, 242, 0.85)),
+    url("${backgroundPrincipalPost}")`,
+    }),
+    []
+  );
+
+  useEffect(() => {
+    animate({
+      backgroundImage: hover
+        ? `linear-gradient(to top, rgba(68, 68, 68, 0.95), rgba(88, 101, 242, 0.85)),
+    url("${backgroundPrincipalPost}")`
+        : `linear-gradient(to top, rgba(68, 68, 68, 0.45), rgba(88, 101, 242, 0.85)),
+    url("${backgroundPrincipalPost}")`,
+    });
+  }, [animate, hover, backgroundPrincipalPost]);
 
   useEffect(() => {
     getFeaturedPosts().then((result) => {
@@ -107,30 +130,38 @@ const FeaturedPosts = () => {
     </div>
   );
   return (
-    <div
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(68, 68, 68, 0.75), rgba(88, 101, 242, 0.85)),
-        url("${backgroundPrincipalPost}")`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        marginTop: "-4.6rem",
-        paddingTop: "6rem",
-      }}
-      className="mb-8 p-6"
-    >
-      <div className="">
-        <div className="mb-6">
-          {dataLoaded &&
-            principalPost.map((post, index) => (
-              <PrincipalPostCard key={index} post={post} />
-            ))}
-        </div>
+    <>
+      <animated.div
+        style={{
+          ...style,
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}
+      >
+        {dataLoaded &&
+          principalPost.map((post, index) => (
+            <PrincipalPostCard key={index} post={post} hover={hover} />
+          ))}
+      </animated.div>
+      <div
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(68, 68, 68, 0.45), rgba(88, 101, 242, 0.85))`,
+          paddingTop: "0rem",
+        }}
+        className="p-6 pb-12"
+      >
         <Carousel
           infinite
+          draggable={false}
           customLeftArrow={customLeftArrow}
           customRightArrow={customRightArrow}
           responsive={responsive}
-          itemClass="px-4"
+          itemClass="px-2"
+          focusOnSelect={true}
+          autoPlay={false}
         >
           {dataLoaded &&
             featuredPosts.map((post, index) => (
@@ -138,7 +169,7 @@ const FeaturedPosts = () => {
             ))}
         </Carousel>
       </div>
-    </div>
+    </>
   );
 };
 

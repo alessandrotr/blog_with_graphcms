@@ -9,7 +9,8 @@ function CategoryBadge(props) {
   return (
     <Link href={`/category/${props.category.slug}`}>
       <p
-        className={`cursor-pointer text-xs flex items-center ${props.customClass}`}
+        // style={{ backgroundColor: props.category.color.hex }}
+        className={`cursor-pointer flex items-center p-1 bg-colorItems font-semibold ${props.customClass}`}
       >
         {/* {props.category.slug === "travel" ? (
           <MdCardTravel className="h-5 w-5 inline mr-2" />

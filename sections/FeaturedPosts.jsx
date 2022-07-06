@@ -46,7 +46,7 @@ const FeaturedPosts = () => {
   useEffect(() => {
     animate({
       backgroundImage: hover
-        ? `linear-gradient(to top, rgba(68, 68, 68, 0.95), rgba(88, 101, 242, 0.85)),
+        ? `linear-gradient(to top, rgba(68, 68, 68, 0.95), rgba(88, 101, 242, 0.95)),
     url("${backgroundPrincipalPost}")`
         : `linear-gradient(to top, rgba(68, 68, 68, 0.45), rgba(88, 101, 242, 0.85)),
     url("${backgroundPrincipalPost}")`,
@@ -134,13 +134,18 @@ const FeaturedPosts = () => {
       <animated.div
         style={{
           ...style,
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          paddingBottom: 0,
         }}
+        className="p-8"
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}
       >
+        <h2 className="text-2xl opacity-80 pl-2 text-primaryLight mb-6">
+          We want you to see
+        </h2>
         {dataLoaded &&
           principalPost.map((post, index) => (
             <PrincipalPostCard key={index} post={post} hover={hover} />
@@ -148,11 +153,18 @@ const FeaturedPosts = () => {
       </animated.div>
       <div
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(68, 68, 68, 0.45), rgba(88, 101, 242, 0.85))`,
-          paddingTop: "0rem",
+          backgroundImage: `linear-gradient(to top, rgba(68, 68, 68, 0.85), rgba(88, 101, 242, 0.75)),
+          url("${backgroundPrincipalPost}")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-        className="p-6 pb-12"
+        className="px-6 py-8"
       >
+        <h2 className="text-2xl opacity-80 pl-2 text-primaryLight mb-8">
+          Featured Posts
+        </h2>
+
         <Carousel
           infinite
           draggable={false}

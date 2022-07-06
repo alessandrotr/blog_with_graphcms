@@ -27,7 +27,7 @@ const PrincipalPostCard = ({ post, hover }) => {
 
   return (
     <Link href={`/post/${post.slug}`}>
-      <div className="relative h-full flex items-center pt-4 pb-16 px-8 cursor-pointer">
+      <div className="relative h-full flex items-center pt-4 pb-20 mb-3 px-8 cursor-pointer">
         <ImageWithFilter post={post} big />
         <div className="flex flex-col px-6 justify-center w-6/12 z-10 h-full">
           <animated.div className="flex mb-3 items-center text-secondaryLight">

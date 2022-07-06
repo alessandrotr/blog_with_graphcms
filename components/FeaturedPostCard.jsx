@@ -13,7 +13,7 @@ const FeaturedPostCard = ({ post }) => {
   const ref = useRef(null);
   const [style, animate] = useSpring(
     () => ({
-      config: { duration: 150, tension: 10 },
+      config: { duration: 250, tension: 300 },
       height: "0px",
     }),
     []
@@ -40,7 +40,7 @@ const FeaturedPostCard = ({ post }) => {
     >
       <animated.div
         style={style}
-        className="flex flex-col justify-center absolute bg-primaryLightOpacity dark:bg-primaryDarkOpacity text-secondaryDark dark:text-secondaryLight p-6 py-20 transition-all"
+        className="flex flex-col justify-center absolute bg-primaryLightOpacity dark:bg-primaryDarkOpacity text-secondaryDark dark:text-secondaryLight p-6 py-20"
       >
         <div className="flex my-1 items-center">
           {post.categories.map((category) => (
@@ -67,7 +67,7 @@ const FeaturedPostCard = ({ post }) => {
         <h2
           className={`leading-tight cursor-pointer my-2 font-semibold underline decoration-4 ${
             hover ? "decoration-[#5865f2]" : " decoration-transparent"
-          } text-2xl`}
+          } text-xl`}
         >
           {post.title}
         </h2>

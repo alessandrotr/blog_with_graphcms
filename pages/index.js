@@ -35,44 +35,36 @@ export default function Home({ posts }) {
     getCategories().then((newCategories) => setCategories(newCategories));
   }, []);
 
-  console.log(categories);
-  console.log(posts[0].node.categories[0].name);
-
   const alternatingColor = [
-    `linear-gradient(to top, rgba(68, 68, 68, 0.75), rgba(88, 101, 242, 0.85)`,
-    `linear-gradient(to bottom, rgba(68, 68, 68, 0.75), rgba(88, 101, 242, 0.85)`,
+    `linear-gradient(to bottom, rgba(68, 68, 68, 0.45), rgba(88, 101, 242, 0.85)`,
+    `linear-gradient(to top, rgba(68, 68, 68, 0.45), rgba(88, 101, 242, 0.85)`,
   ];
-
+  console.log(categories);
   return (
     <div style={{ maxWidth: "1100px" }} className="container mx-auto">
       <Head>
         <title>Blog</title>
       </Head>
-      <div
-        style={{
-          backgroundImage:
-            "linear-gradient(to bottom, rgba(68, 68, 68, 0.75), rgba(88, 101, 242, 0.85)",
-        }}
-        className="px-6 py-8"
-      >
-        <h2 className="text-2xl opacity-80 pl-2">We want you to see</h2>
-      </div>
+
       <FeaturedPosts />
       {categories.map((category, index) => (
         <>
-          {console.log(category)}
           <div
             key={category.slug}
             style={{
-              backgroundImage:
-                alternatingColor[index % alternatingColor.length],
+              backgroundImage: `linear-gradient(to top, rgba(68, 68, 68, 0.85), rgba(88, 101, 242, 0.75)),
+              url("${category.featuredImage.url}")`,
+              // backgroundImage: `linear-gradient(to bottom, rgba(68, 68, 68, 0.45), rgba(88, 101, 242, 0.85),
+              // url("${category.featuredImage.url}")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
             }}
-            className="px-6 py-3"
+            className="px-6 py-8 mt-3"
           >
-            <h2 className="text-2xl opacity-80 mb-6 pl-2">{category.name}</h2>
+            <h2 className="text-2xl opacity-80 mb-8 pl-2 text-primaryLight">
+              {category.name}
+            </h2>
             <Carousel
               infinite
               draggable={false}

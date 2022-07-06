@@ -31,14 +31,14 @@ const PostDetails = ({ post }) => {
         style={{ maxWidth: "1100px" }}
         className="container mx-auto px-4 md:px-0 mb-8"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="col-span-1 lg:col-span-8">
+        <div className="">
+          <div className="">
             <PostDetail post={post} />
             {/* <Author author={post.author} /> */}
             <CommentsForm slug={post.slug} />
             <Comments slug={post.slug} />
           </div>
-          <div className="col-span-1 lg:col-span-4">
+          {/* <div className="col-span-1 lg:col-span-4">
             <AdjacentPosts slug={post.slug} createdAt={post.createdAt} />
             <div
               className={`relative lg:sticky transition-all duration-500 ${
@@ -50,9 +50,9 @@ const PostDetails = ({ post }) => {
                 categories={post.categories.map((category) => category.slug)}
               />
               <VoteButton post={post} />
-              {/* <Categories /> */}
+              <Categories />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

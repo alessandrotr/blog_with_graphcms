@@ -4,6 +4,9 @@ import CreatedAtBadge from "./ui/CreatedAtBadge";
 import CommentsCount from "./ui/CommentsCount";
 import ReadingProgress from "./ReadingProgress/readingProgress";
 import VotesBadge from "./ui/VotesBadge";
+import store from "../appStore";
+
+import { useSnapshot } from "valtio";
 
 const PostDetail = ({ post }) => {
   const target = useRef();
@@ -65,6 +68,7 @@ const PostDetail = ({ post }) => {
   };
 
   let categoryColor = post.categories.map((color) => color.color.hex);
+  const snap = useSnapshot(store);
 
   const [votes, setVotes] = useState([]);
 
@@ -74,32 +78,54 @@ const PostDetail = ({ post }) => {
 
   return (
     <>
-      <ReadingProgress target={target} />
       <div ref={target} className="lg:p-2 lg:pt-0 pb-12 mb-8 rounded-lg ">
-        <div className="flex mb-6">
-          {post.categories.map((category) => (
-            <CategoryBadge key={category.name} category={category} />
-          ))}
-          <CreatedAtBadge
-            postCreatedAt={post.createdAt}
-            categoryColor={categoryColor}
-            customClass=""
-            showIcon
-          />
-          <CommentsCount post={post} categoryColor={categoryColor} />
-          <VotesBadge categoryColor={categoryColor} votes={votes} />
+        <ReadingProgress target={target} />
+        <div
+          className={`flex mb-6 justify-between items-center sticky py-2 bg-primaryLight dark:bg-primaryDark ${
+            snap.headerVisible ? "top-16 " : "top-0 "
+          }`}
+        >
+          <div className="flex items-center">
+            {post.categories.map((category) => (
+              <CategoryBadge
+                key={category.name}
+                category={category}
+                color={category.color}
+                customClass="text-md mr-2"
+              />
+            ))}
+            <p className="whitespace-nowrap overflow-hidden text-ellipsis w-62 ml-2">
+              {post.title}
+            </p>
+          </div>
+          <div className="flex items-center">
+            <CommentsCount
+              post={post}
+              categoryColor={categoryColor}
+              customClass="mx-4 text-md"
+            />
+            <VotesBadge categoryColor={categoryColor} votes={votes} />
+            <CreatedAtBadge
+              postCreatedAt={post.createdAt}
+              categoryColor={categoryColor}
+              customClass="ml-4 font-normal text-md"
+            />
+          </div>
         </div>
         <div
-          className="bg-cover"
+          className="bg-cover h-full"
           style={{ backgroundImage: `url("${post.featuredImage.url}")` }}
         >
-          <div className="bg-center bg-gradient-to-b from-gray-400 via-gray-700 to-black p-4">
-            <h1 className="mb-8 text-6xl font-semibold leading-normal pr-8">
+          <div
+            className="p-8 h-full flex items-end"
+            style={{ height: "50vh", backgroundColor: "rgba(0,0,0,0.6" }}
+          >
+            <h1 className="text-4xl md:text-6xl font-semibold leading-normal w-3/4 text-primaryLight">
               {post.title}
             </h1>
-            <p className="mb-8 text-lg font-normal leading-normal">
+            {/* <p className="mb-8 text-lg font-normal leading-normal">
               {post.excerpt}
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="px-4 lg:px-0">

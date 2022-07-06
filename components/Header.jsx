@@ -54,19 +54,19 @@ function Header() {
         // transform: `${show ? "translateY(0)" : "translateY(-100%)"}`,
         opacity: `${show ? 1 : 0}`,
       }}
-      className={`z-20 transition-all duration-250 sticky top-0 w-full container mx-auto px-4 md:px-0 bg-primaryLightOpacity dark:bg-primaryDarkOpacity text-secondaryDark dark:text-secondaryLight
+      className={`z-20 transition-all duration-250 sticky top-0 w-full container mx-auto px-4 md:px-0 bg-primaryLight dark:bg-primaryDark text-secondaryDark dark:text-secondaryLight
       
       `}
     >
       <div className="w-full flex align-center items-center justify-between py-4 px-2">
         <div className="md:float-left block">
           <Link href="/" passHref>
-            <h4 className="cursor-pointer font-bold text-4xl pl-2">The Blog</h4>
+            <h4 className="cursor-pointer font-bold text-4xl">The Blog</h4>
           </Link>
         </div>
-        <div className="flex align-center items-center ">
+        <div className="flex align-center items-center">
           <CategoryMenu categories={categories} />
-          <div className="ml-4 ">
+          <div className="ml-4">
             <ThemeToggle />
           </div>
         </div>
